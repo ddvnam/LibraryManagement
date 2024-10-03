@@ -1,23 +1,30 @@
 package com.example.librarymanagement2;
 
 public class Account {
-    public enum AcountStatus {
-        ACTIVE, CLOSED, CANCELED, BLACKLISTED, NONE
+    public enum AccountStatus {
+        ACTIVE, CANCELED, BLACKLISTED, NONE
     }
     private String username; // thay the cho id
     private String password;
-    private AcountStatus status;
+    private AccountStatus status;
+    private String role;
     private Person person;
 
     //Constructors
     public Account() {
         this.username = "";
         this.password = "";
-        this.status = AcountStatus.NONE;
+        this.status = AccountStatus.NONE;
         this.person = new Person();
     }
 
-    public Account(String username, String password, AcountStatus status, Person person) {
+    public Account(String username, String password, AccountStatus status) {
+        this.username = username;
+        this.password = password;
+        this.status = status;
+    }
+
+    public Account(String username, String password, AccountStatus status, Person person) {
         this.username = username;
         this.password = password;
         this.status = status;
@@ -42,11 +49,11 @@ public class Account {
         this.password = password;
     }
 
-    public AcountStatus getStatus() {
+    public AccountStatus getStatus() {
         return status;
     }
 
-    public void setStatus(AcountStatus status) {
+    public void setStatus(AccountStatus status) {
         this.status = status;
     }
 
@@ -58,5 +65,20 @@ public class Account {
         this.person = person;
     }
 
+    public String getRole() {
+        return role;
+    }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+
+    public boolean validateLogin(String username, String password) {
+        if(this.status == AccountStatus.CANCELED) {
+            System.out.println("This account has been canceled. Please register a new account.");
+            return false;
+        }
+        return this.username.equals(username) && this.password.equals(password);
+    }
 }

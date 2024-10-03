@@ -1,6 +1,12 @@
 package com.example.librarymanagement2;
 
 public class Librarian extends Account{
+
+    public Librarian(String username, String password) {
+        super(username, password, AccountStatus.ACTIVE);
+        this.setRole("librarian");
+    }
+
     public boolean addBookItem( BookItem bookItem) {
         //code to add book item
         return true;
