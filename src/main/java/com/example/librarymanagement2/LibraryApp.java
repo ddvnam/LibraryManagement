@@ -33,6 +33,11 @@ public class LibraryApp {
                     System.out.println("Login failed");
                 }
             } else if(choice == 2) {
+                if(Register()) {
+                    System.out.println("Register successful");
+                    System.out.println("Register failed");
+                }
+            } else if(choice == 3) {
                 break;
             }
         }
@@ -57,13 +62,15 @@ public class LibraryApp {
     public static boolean Register() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter username: ");
-        String user = scanner.nextLine();
+        String user = scanner.nextLine().trim();
         System.out.println("Enter password: ");
         String pass = scanner.nextLine();
         System.out.println("Enter password again: ");
         String pass2 = scanner.nextLine();
-        if(pass.equals(pass2)) {
-            accounts.add(new Account(user, pass, Account.AccountStatus.ACTIVE));
+        if (pass.equals(pass2)) {
+            Account newAccount = new Account(user, pass, Account.AccountStatus.ACTIVE);
+            newAccount.setRole("member");
+            accounts.add(newAccount);
             return true;
         }
         return false;
