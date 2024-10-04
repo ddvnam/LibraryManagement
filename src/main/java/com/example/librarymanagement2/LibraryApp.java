@@ -35,6 +35,7 @@ public class LibraryApp {
             } else if(choice == 2) {
                 if(Register()) {
                     System.out.println("Register successful");
+                } else {
                     System.out.println("Register failed");
                 }
             } else if(choice == 3) {
