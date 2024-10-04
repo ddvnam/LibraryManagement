@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class LibraryApp {
     public static List<BookItem> bookItems = new ArrayList<>();
+    public static Catalog catalog = new Catalog();
     public static List<Account> accounts = new ArrayList<>();
     private static Menu menu = new Menu();
     private static Account currentAccount;
@@ -16,6 +17,10 @@ public class LibraryApp {
         accounts.add(new Member("member1", "123"));
         accounts.add(new Member("member2", "123"));
 
+
+        // Add books to the catalog
+        Book book1 = new Book("123", "Harry Potter", "Fantasy", "Bloomsbury", "English", 223, new Author("J.K. Rowling", ""), null);
+        Book book2 = new Book("124", "The Hobbit", "Fantasy", "Allen & Unwin", "English", 310, new Author("J.R.R. Tolkien", ""), null);
         while(true) {
             menu.showMainMenu();
             int choice = menu.getUserInput();

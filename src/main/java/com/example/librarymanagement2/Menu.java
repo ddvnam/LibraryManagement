@@ -96,7 +96,6 @@ public class Menu {
         return null;
     }
 
-
     public void showMemberMenu() {
         while (true) {
             System.out.println("\nMember Menu:");

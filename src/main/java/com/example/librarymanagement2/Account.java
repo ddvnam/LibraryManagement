@@ -81,4 +81,7 @@ public class Account {
         }
         return this.username.equals(username) && this.password.equals(password);
     }
+    public boolean resetPassword() {
+        return true;
+    }
 }

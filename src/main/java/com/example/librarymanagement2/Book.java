@@ -1,5 +1,6 @@
 package com.example.librarymanagement2;
 
+import java.util.Date;
 import java.util.List;
 
 public class Book {
@@ -10,14 +11,17 @@ public class Book {
     private String language;
     private int numberOfPages;
     private Author author;
+    private Date publicationDate;
 
-    public Book(String isbn, String title, String subject, String publisher, String language, int numberOfPages) {
+    public Book(String isbn, String title, String subject, String publisher, String language, int numberOfPages, Author author, Date publicationDate) {
         this.ISBN = isbn;
         this.title = title;
         this.subject = subject;
         this.publisher = publisher;
         this.language = language;
         this.numberOfPages = numberOfPages;
+        this.author = author;
+        this.publicationDate = publicationDate;
     }
 
     public Author getAuthor() {
@@ -74,5 +78,13 @@ public class Book {
 
     public String getTitle() {
         return title;
+    }
+
+    public Date getPublicationDate() {
+        return publicationDate;
+    }
+
+    public void setPublicationDate(Date publicationDate) {
+        this.publicationDate = publicationDate;
     }
 }

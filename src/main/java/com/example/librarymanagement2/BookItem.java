@@ -27,11 +27,10 @@ public class BookItem extends Book{
     private double price;
     private BookFormat format;
     private Date dateOfPurchase;
-    private Date publicationDate;
     private BookStatus status;
 
-    public BookItem(String ISBN, String title, String subject, String publisher, String language, int numberOfPages) {
-        super(ISBN, title, subject, publisher, language, numberOfPages);
+    public BookItem(String ISBN, String title, String subject, String publisher, String language, int numberOfPages, Author author, Date publicationDate) {
+        super(ISBN, title, subject, publisher, language, numberOfPages, author, publicationDate);
     }
 
     public String getBarcode() {
@@ -88,14 +87,6 @@ public class BookItem extends Book{
 
     public void setDateOfPurchase(Date dateOfPurchase) {
         this.dateOfPurchase = dateOfPurchase;
-    }
-
-    public Date getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(Date publicationDate) {
-        this.publicationDate = publicationDate;
     }
 
     public BookStatus getStatus() {
