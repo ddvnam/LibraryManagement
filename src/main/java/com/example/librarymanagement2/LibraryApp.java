@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class LibraryApp {
-    private static List<Account> accounts = new ArrayList<>();
+    public static List<BookItem> bookItems = new ArrayList<>();
+    public static List<Account> accounts = new ArrayList<>();
     private static Menu menu = new Menu();
     private static Account currentAccount;
 

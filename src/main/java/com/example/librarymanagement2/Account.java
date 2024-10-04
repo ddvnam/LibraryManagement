@@ -2,7 +2,7 @@ package com.example.librarymanagement2;
 
 public class Account {
     public enum AccountStatus {
-        ACTIVE, CANCELED, BLACKLISTED, NONE
+        ACTIVE, CANCELED, BLACKLISTED, BLOCKED, NONE
     }
     private String username; // thay the cho id
     private String password;

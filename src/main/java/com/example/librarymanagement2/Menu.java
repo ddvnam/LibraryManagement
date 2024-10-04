@@ -29,18 +29,45 @@ public class Menu {
             System.out.print("Select an option: ");
 
             int choice = getUserInput();
+            scanner.nextLine();  // consume the newline
             switch(choice) {
                 case 1:
                     System.out.println("Block Account");
+                    System.out.println("Enter username: ");
+                    String username = getUserStringInput();
+                    // Find the account in the accounts list
+                    Account foundAccount = findMemberByUsername(username);
+                    if(foundAccount != null && foundAccount instanceof Member) {
+                        Librarian.blockMember((Member) foundAccount);
+                        System.out.println("Account " + username + " has been blocked.");
+                    } else {
+                        System.out.println("Member not found.");
+                    }
                     break;
                 case 2:
                     System.out.println("Unblock Account");
+                    System.out.println("Enter username: ");
+                    username = getUserStringInput();
+                    foundAccount = findMemberByUsername(username);
+                    if(foundAccount != null && foundAccount instanceof Member) {
+                        if(foundAccount.getStatus() == Account.AccountStatus.BLOCKED) {
+                            Librarian.unblockMember((Member) foundAccount);
+                            System.out.println("Account " + username + " has been unblocked.");
+                        } else {
+                            System.out.println("Account " + username + " is not blocked.");
+                        }
+                    } else {
+                        System.out.println("Member not found.");
+                    }
                     break;
                 case 3:
                     System.out.println("Cancel Account");
                     break;
                 case 4:
                     System.out.println("Check Account Status");
+                    for(Account account : LibraryApp.accounts) {
+                        System.out.println(account.getUsername() + " : " + account.getStatus());
+                    }
                     break;
                 case 5:
                     System.out.println("Are you sure you want to exit? (Y/N)");
@@ -48,7 +75,7 @@ public class Menu {
                     if(exitChoice == 'Y' || exitChoice == 'y') {
                         System.out.println("Exiting...");
                         System.exit(0);
-                    }else {
+                    } else {
                         showAdminMenu();
                     }
                     break;
@@ -57,6 +84,17 @@ public class Menu {
             }
         }
     }
+
+    // Helper method to find member by username
+    private Account findMemberByUsername(String username) {
+        for(Account account : LibraryApp.accounts) {
+            if(account.getUsername().equals(username)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
 
     public void showMemberMenu() {
         while (true) {
@@ -70,6 +108,7 @@ public class Menu {
             System.out.print("Select an option: ");
 
             int choice = getUserInput();
+            scanner.nextLine();
             switch(choice) {
                 case 1:
                     System.out.println("Search Books");
@@ -108,7 +147,7 @@ public class Menu {
 
     // Method to read user input as a string
     public String getUserStringInput() {
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     // Closing the scanner to prevent resource leaks

@@ -10,6 +10,11 @@ public class Member extends Account{
         super(username, password, AccountStatus.ACTIVE);
         this.setRole("member");
     }
+
+    public Member(String username) {
+        this.setUsername(username);
+        this.setRole("member");
+    }
     public int getTotalBooksCheckedout() {
         return totalBooksCheckedout;
     }
