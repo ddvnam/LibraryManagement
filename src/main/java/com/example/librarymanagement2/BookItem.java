@@ -3,15 +3,6 @@ package com.example.librarymanagement2;
 import java.util.Date;
 
 public class BookItem extends Book{
-    public enum BookFormat {
-        HARDCOVER,
-        PAPERBACK,
-        AUDIO_BOOK,
-        EBOOK,
-        NEWSPAPER,
-        MAGAZINE,
-        JOURNAL
-    }
 
     public enum BookStatus {
         AVAILABLE,
@@ -25,7 +16,6 @@ public class BookItem extends Book{
     private Date borrowed;
     private Date dueDate;
     private double price;
-    private BookFormat format;
     private Date dateOfPurchase;
     private BookStatus status;
 
@@ -71,14 +61,6 @@ public class BookItem extends Book{
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public BookFormat getFormat() {
-        return format;
-    }
-
-    public void setFormat(BookFormat format) {
-        this.format = format;
     }
 
     public Date getDateOfPurchase() {

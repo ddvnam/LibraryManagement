@@ -1,9 +1,20 @@
 package com.example.librarymanagement2;
 
+/**
+*Đây là lớp Accouunt dùng để quản lý tài khoản người dùng
+ */
 public class Account {
+    /**
+     * Đây là enum AccountStatus dùng để quản lý trạng thái của tài khoản
+     * ACTIVE: tài khoản đang hoạt động
+     * CANCELED: tài khoản đã bị hủy, không thể login khi trạng thái này
+     * BLACKLISTED: tài khoản trả sách quá hạn nhiều lần
+     * BLOCKED: tài khoản bị block trong một khoảng thời gian
+     */
     public enum AccountStatus {
         ACTIVE, CANCELED, BLACKLISTED, BLOCKED, NONE
     }
+
     private String username; // thay the cho id
     private String password;
     private AccountStatus status;
@@ -17,6 +28,14 @@ public class Account {
         this.status = AccountStatus.NONE;
         this.person = new Person();
     }
+
+    /**
+     * Constructor
+     * @param username
+     * @param password
+     * @param status
+     *
+     */
 
     public Account(String username, String password, AccountStatus status) {
         this.username = username;
@@ -73,7 +92,12 @@ public class Account {
         this.role = role;
     }
 
-
+    /**
+     * Phương thức này dùng để kiểm tra thông tin đăng nhập
+     * @param username
+     * @param password
+     * @return true nếu thông tin đăng nhập đúng, ngược lại trả về false đồng thời kiểm tra trạng thái tài khoản
+     */
     public boolean validateLogin(String username, String password) {
         if(this.status == AccountStatus.CANCELED) {
             System.out.println("This account has been canceled. Please register a new account.");

@@ -2,6 +2,10 @@ package com.example.librarymanagement2;
 
 import java.util.*;
 
+/**
+ * Catalog là class chứa thông tin cuốn sách và cung cấp các phương thức tìm kiếm sách
+ * Catalog quản lí BookItem
+ */
 public class Catalog implements Search {
     private Date creationDate;
     private int totalBooks;
@@ -65,16 +69,31 @@ public class Catalog implements Search {
         bookPublishDates.get(publishDate).add(newBook);
     }
 
+    /**
+     * Tìm kiếm sách theo tiêu đề
+     * @param title
+     * @return  List<Book> chứa các cuốn sách có tiêu đề trùng với title
+     */
     @Override
     public List<Book> searchByTitle(String title) {
         return bookTitles.get(title.trim());
     }
 
+    /**
+     * Tìm kiếm sách theo tác giả
+     * @param author
+     * @return List<Book> chứa các cuốn sách có tác giả trùng với author
+     */
     @Override
     public List<Book> searchByAuthor(String author) {
         return bookAuthors.get(author);
     }
 
+    /**
+     * Tìm kiếm sách theo ngày xuất bản
+     * @param publishDate
+     * @return List<Book> chứa các cuốn sách có ngày xuất bản trùng với publishDate
+     */
     @Override
     public List<Book> searchByPubDate(String publishDate) {
         return bookPublishDates.get(publishDate);
