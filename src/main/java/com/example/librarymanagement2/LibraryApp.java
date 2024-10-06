@@ -21,10 +21,11 @@ public class LibraryApp {
         accounts.add(new Librarian("lib2", "123"));
         accounts.add(new Member("member1", "123"));
         accounts.add(new Member("member2", "123"));
-
         //Load data
         database.loadData(books, FILE_NAME);
-        catalog.loadData(books);
+        catalog.loadBooks(books);
+        catalog.loadBookItems(books);
+
         while(true) {
             menu.showMainMenu();
             int choice = menu.getUserInput();

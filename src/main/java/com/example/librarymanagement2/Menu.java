@@ -103,8 +103,7 @@ public class Menu {
             System.out.println("2. Check Out Book");
             System.out.println("3. Return Book");
             System.out.println("4. Renew Book");
-            System.out.println("5. Pay Fine");
-            System.out.println("6. Exit");
+            System.out.println("5. Exit");
             System.out.print("Select an option: ");
 
             int choice = getUserInput();
@@ -115,17 +114,16 @@ public class Menu {
                     break;
                 case 2:
                     System.out.println("Check Out Book");
+                    member.checkOutBook(catalog);
                     break;
                 case 3:
                     System.out.println("Return Book");
+                    member.returnBook(catalog);
                     break;
                 case 4:
                     System.out.println("Renew Book");
                     break;
                 case 5:
-                    System.out.println("Pay Fine");
-                    break;
-                case 6:
                     System.out.println("Are you sure you want to exit? (Y/N)");
                     char exitChoice = getUserStringInput().trim().charAt(0);
                     if (exitChoice == 'Y' || exitChoice == 'y') {

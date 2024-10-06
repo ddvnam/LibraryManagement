@@ -11,8 +11,8 @@ public class Catalog implements Search {
     private int totalBooks;
     private Map<String, List<Book>> bookTitles;
     private Map<String, List<Book>> bookAuthors;
-    private Map<String, List<Book>> bookSubjects;
     private Map<String, List<Book>> bookPublishDates;
+    private List<BookItem> bookItems;
 
     //Getters and Setters
     public Catalog() {
@@ -20,8 +20,8 @@ public class Catalog implements Search {
         this.totalBooks = 0;
         this.bookTitles = new HashMap<>();
         this.bookAuthors = new HashMap<>();
-        this.bookSubjects = new HashMap<>();
         this.bookPublishDates = new HashMap<>();
+        this.bookItems = new ArrayList<>();
     }
     public Date getCreationDate() {
         return creationDate;
@@ -39,7 +39,25 @@ public class Catalog implements Search {
         this.totalBooks = totalBooks;
     }
 
-    public void loadData(List<Book> books) {
+    public List<BookItem> getBookItems() {
+        return bookItems;
+    }
+
+    public void setBookItems(List<BookItem> bookItems) {
+        this.bookItems = bookItems;
+    }
+
+    public void addBookItem(BookItem bookItem) {
+        bookItems.add(bookItem);
+    }
+
+    public void loadBookItems(List<Book> books) {
+        for (Book book : books) {
+            BookItem bookItem = new BookItem(book.getISBN(), book.getTitle(), book.getPublisher(), book.getAuthor(), book.getPublicationDate());
+            addBookItem(bookItem);
+        }
+    }
+    public void loadBooks(List<Book> books) {
         for (Book book : books) {
             updateCatalog(book);
         }
@@ -97,5 +115,23 @@ public class Catalog implements Search {
     @Override
     public List<Book> searchByPubDate(String publishDate) {
         return bookPublishDates.get(publishDate);
+    }
+
+    public BookItem getBookItem(Book book) {
+        for (BookItem bookItem : bookItems) {
+            if (bookItem.getTitle().equals(book.getTitle())) {
+                return bookItem;
+            }
+        }
+        return null;
+    }
+
+    public BookItem getBookItem(BookItem bookItem) {
+        for (BookItem item : bookItems) {
+            if (item.getTitle().equals(bookItem.getTitle())) {
+                return item;
+            }
+        }
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.librarymanagement2;
 
 import java.util.Date;
+import java.util.Random;
 
 public class BookItem extends Book{
 
@@ -15,9 +16,12 @@ public class BookItem extends Book{
     private double price;
     private Date dateOfPurchase;
     private BookStatus status;
+    private int numOfCopies;
 
     public BookItem(String ISBN, String title, String publisher, Author author, String publicationDate) {
         super(ISBN, title, publisher, author, publicationDate);
+        Random random = new Random();
+        this.numOfCopies = random.nextInt(5) + 1;
     }
 
     public String getBarcode() {
@@ -60,8 +64,33 @@ public class BookItem extends Book{
         this.status = status;
     }
 
+    public int getNumOfCopies() {
+        return numOfCopies;
+    }
+
+    public void setNumOfCopies(int numOfCopies) {
+        this.numOfCopies = numOfCopies;
+    }
+
     public boolean checkout() {
-        // Implement checkout logic
-        return true;
+        if(this.numOfCopies > 0) {
+            this.numOfCopies--;
+            if(this.numOfCopies == 0) {
+                this.status = BookStatus.UNAVAILABLE;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkin() {
+        if(this.numOfCopies >= 0) {
+            this.numOfCopies++;
+            if(this.numOfCopies > 0) {
+                this.status = BookStatus.AVAILABLE;
+            }
+            return true;
+        }
+        return false;
     }
 }
