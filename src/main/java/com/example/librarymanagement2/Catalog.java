@@ -40,7 +40,7 @@ public class Catalog implements Search {
             updateCatalog(book);
         }
     }
-    public boolean updateCatalog(Book newBook) {
+    private boolean updateCatalog(Book newBook) {
         addBookToTitleMap(newBook);
         addBookToAuthorMap(newBook);
         addBookToPublishDateMap(newBook);
@@ -48,13 +48,13 @@ public class Catalog implements Search {
     }
 
     private void addBookToTitleMap(Book newBook) {
-        String title = newBook.getTitle();
+        String title = newBook.getTitle().trim();
         bookTitles.putIfAbsent(title, new ArrayList<>());
         bookTitles.get(title).add(newBook);
     }
 
     private void addBookToAuthorMap(Book newBook) {
-        String authorName = newBook.getAuthor().getName();
+        String authorName = newBook.getAuthor().getName().trim();
         bookAuthors.putIfAbsent(authorName, new ArrayList<>());
         bookAuthors.get(authorName).add(newBook);
     }
@@ -67,7 +67,7 @@ public class Catalog implements Search {
 
     @Override
     public List<Book> searchByTitle(String title) {
-        return bookTitles.get(title);
+        return bookTitles.get(title.trim());
     }
 
     @Override

@@ -57,4 +57,12 @@ public class Book {
     public void setPublicationDate(String publicationDate) {
         this.publicationDate = publicationDate;
     }
+
+    public void getInformation() {
+        System.out.println("ISBN: " + ISBN);
+        System.out.println("Title: " + title);
+        System.out.println("Publisher: " + publisher);
+        System.out.println("Author: " + author.getName());
+        System.out.println("Publication Date: " + publicationDate);
+    }
 }

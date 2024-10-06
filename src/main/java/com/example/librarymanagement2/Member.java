@@ -57,7 +57,8 @@ public class Member extends Account{
         } else {
             System.out.println("Search Results:");
             for (Book book : results) {
-                System.out.println(book.getTitle() + " by " + String.join(", ", book.getAuthor().getName()));
+                book.getInformation();
+                System.out.println("-------------------------");
             }
         }
     }

@@ -101,17 +101,35 @@ public class Database {
 
 
     public void loadData(List<Book> bookList, String fileName) throws IOException {
-        FileReader fr = new FileReader(fileName);
-        BufferedReader br = new BufferedReader(fr);
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            int count = 0;
 
-        String line;
-        Author author = new Author();
-        line = br.readLine();
-        while((line = br.readLine()) != null) {
-            String[] data = line.split(",");
-            author.setName(data[3]);
-            Book book = new Book(data[0], data[1], data[2], author, data[4]);
-            bookList.add(book);
+            // Read each line in the file
+            while ((line = br.readLine()) != null) {
+                // Skip empty lines
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
+                String[] data = line.split(",");
+                // Ensure that the array has the correct length
+                if (data.length < 5) {
+                    System.err.println("Invalid line format: " + line);
+                    continue; // Skip this line if it doesn't have enough data
+                }
+
+                // Create a new Author for each book
+                Author author = new Author();
+                author.setName(data[3]);
+
+                // Create a new Book object
+                Book book = new Book(data[0], data[1], data[2], author, data[4]);
+                bookList.add(book);
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+            throw e;
         }
     }
 }

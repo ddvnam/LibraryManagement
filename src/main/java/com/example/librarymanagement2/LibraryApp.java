@@ -25,11 +25,6 @@ public class LibraryApp {
         //Load data
         database.loadData(books, FILE_NAME);
         catalog.loadData(books);
-
-        List<Book> temp = catalog.searchByTitle("Classical Mythology");
-        for (Book book : temp) {
-            System.out.println(book.getTitle());
-        }
         while(true) {
             menu.showMainMenu();
             int choice = menu.getUserInput();
