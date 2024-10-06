@@ -7,13 +7,10 @@ public class BookItem extends Book{
     public enum BookStatus {
         AVAILABLE,
         RESERVED,
-        LOANED,
-        LOST
+        UNAVAILABLE,
     }
 
     private String barcode;
-    private boolean isReferenceOnly;
-    private Date borrowed;
     private Date dueDate;
     private double price;
     private Date dateOfPurchase;
@@ -29,22 +26,6 @@ public class BookItem extends Book{
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
-    }
-
-    public boolean isReferenceOnly() {
-        return isReferenceOnly;
-    }
-
-    public void setReferenceOnly(boolean referenceOnly) {
-        isReferenceOnly = referenceOnly;
-    }
-
-    public Date getBorrowed() {
-        return borrowed;
-    }
-
-    public void setBorrowed(Date borrowed) {
-        this.borrowed = borrowed;
     }
 
     public Date getDueDate() {
