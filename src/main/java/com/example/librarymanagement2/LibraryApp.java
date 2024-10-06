@@ -1,37 +1,46 @@
 package com.example.librarymanagement2;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class LibraryApp {
+    public static final String FILE_NAME = "D:\\Learning\\Java\\LibraryManagement\\src\\main\\java\\Database\\books.txt";
+    public static List<Book> books = new ArrayList<>();
     public static List<BookItem> bookItems = new ArrayList<>();
+    public static Database database = new Database();
     public static Catalog catalog = new Catalog();
     public static List<Account> accounts = new ArrayList<>();
     private static Menu menu = new Menu();
     private static Account currentAccount;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        // Testing Account
         accounts.add(new Librarian("lib1", "123"));
         accounts.add(new Librarian("lib2", "123"));
         accounts.add(new Member("member1", "123"));
         accounts.add(new Member("member2", "123"));
 
+        //Load data
+        database.loadData(books, FILE_NAME);
+        catalog.loadData(books);
 
-        // Add books to the catalog
-        Book book1 = new Book("123", "Harry Potter", "Fantasy", "Bloomsbury", "English", 223, new Author("J.K. Rowling", ""), null);
-        Book book2 = new Book("124", "The Hobbit", "Fantasy", "Allen & Unwin", "English", 310, new Author("J.R.R. Tolkien", ""), null);
+        List<Book> temp = catalog.searchByTitle("Classical Mythology");
+        for (Book book : temp) {
+            System.out.println(book.getTitle());
+        }
         while(true) {
             menu.showMainMenu();
             int choice = menu.getUserInput();
             if(choice == 1) {
                 if(Login()) {
                     System.out.println("Login successful");
-                    if(currentAccount.getRole() == "librarian") {
+                    if(currentAccount instanceof Librarian) {
                         menu.showAdminMenu();
                     }
-                    if(currentAccount.getRole() == "member") {
-                        menu.showMemberMenu();
+                    if(currentAccount instanceof Member) {
+                        menu.showMemberMenu((Member) currentAccount, catalog);
                     }
 
                 } else {

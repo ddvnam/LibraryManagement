@@ -1,5 +1,7 @@
 package com.example.librarymanagement2;
 
+import java.util.Date;
+
 public class Librarian extends Account{
 
     public Librarian(String username, String password) {
@@ -7,8 +9,8 @@ public class Librarian extends Account{
         this.setRole("librarian");
     }
 
-    public void addBookItem(String ISBN, String title, String subject, String publisher, String language, int numberOfPages, Author author, Date publicationDate) {
-        BookItem bookItem = new BookItem(ISBN, title, subject, publisher, language, numberOfPages, author, publicationDate);
+    public void addBookItem(String ISBN, String title, String publisher,  Author author, String publicationDate) {
+        BookItem bookItem = new BookItem(ISBN, title, publisher, author, publicationDate);
         LibraryApp.bookItems.add(bookItem);
         System.out.println("Book added : " + bookItem.getTitle() + " by " + bookItem.getAuthor().getName());
     }

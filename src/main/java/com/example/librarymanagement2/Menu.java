@@ -96,7 +96,7 @@ public class Menu {
         return null;
     }
 
-    public void showMemberMenu() {
+    public void showMemberMenu(Member member, Catalog catalog) {
         while (true) {
             System.out.println("\nMember Menu:");
             System.out.println("1. Search Books");
@@ -111,7 +111,7 @@ public class Menu {
             scanner.nextLine();
             switch(choice) {
                 case 1:
-                    System.out.println("Search Books");
+                    member.searchBooks(catalog);
                     break;
                 case 2:
                     System.out.println("Check Out Book");
@@ -132,7 +132,7 @@ public class Menu {
                         System.out.println("Exiting...");
                         System.exit(0);
                     } else {
-                        showMemberMenu();
+                        showMemberMenu(member, catalog);
                     }
                     break;
                 default:

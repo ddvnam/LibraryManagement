@@ -1,9 +1,16 @@
 package com.example.librarymanagement2;
 
-import javax.xml.transform.Result;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 
 public class Database {
     private String url;
@@ -12,6 +19,10 @@ public class Database {
     private Connection connection;
 
     //Constructor
+
+    public Database() {
+    }
+
     public Database(String url, String username, String password) {
         this.url = url;
         this.username = username;
@@ -85,6 +96,22 @@ public class Database {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+
+    public void loadData(List<Book> bookList, String fileName) throws IOException {
+        FileReader fr = new FileReader(fileName);
+        BufferedReader br = new BufferedReader(fr);
+
+        String line;
+        Author author = new Author();
+        line = br.readLine();
+        while((line = br.readLine()) != null) {
+            String[] data = line.split(",");
+            author.setName(data[3]);
+            Book book = new Book(data[0], data[1], data[2], author, data[4]);
+            bookList.add(book);
         }
     }
 }

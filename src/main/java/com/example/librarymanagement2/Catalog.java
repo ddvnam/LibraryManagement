@@ -8,7 +8,7 @@ public class Catalog implements Search {
     private Map<String, List<Book>> bookTitles;
     private Map<String, List<Book>> bookAuthors;
     private Map<String, List<Book>> bookSubjects;
-    private Map<Date, List<Book>> bookPublishDates;
+    private Map<String, List<Book>> bookPublishDates;
 
     //Getters and Setters
     public Catalog() {
@@ -35,10 +35,14 @@ public class Catalog implements Search {
         this.totalBooks = totalBooks;
     }
 
+    public void loadData(List<Book> books) {
+        for (Book book : books) {
+            updateCatalog(book);
+        }
+    }
     public boolean updateCatalog(Book newBook) {
         addBookToTitleMap(newBook);
         addBookToAuthorMap(newBook);
-        addBookToSubjectMap(newBook);
         addBookToPublishDateMap(newBook);
         return true;
     }
@@ -55,14 +59,8 @@ public class Catalog implements Search {
         bookAuthors.get(authorName).add(newBook);
     }
 
-    private void addBookToSubjectMap(Book newBook) {
-        String subject = newBook.getSubject();
-        bookSubjects.putIfAbsent(subject, new ArrayList<>());
-        bookSubjects.get(subject).add(newBook);
-    }
-
     private void addBookToPublishDateMap(Book newBook) {
-        Date publishDate = newBook.getPublicationDate();
+        String publishDate = newBook.getPublicationDate();
         bookPublishDates.putIfAbsent(publishDate, new ArrayList<>());
         bookPublishDates.get(publishDate).add(newBook);
     }
@@ -78,12 +76,7 @@ public class Catalog implements Search {
     }
 
     @Override
-    public List<Book> searchBySubject(String subject) {
-        return bookSubjects.get(subject);
-    }
-
-    @Override
-    public List<Book> searchByPubDate(Date publishDate) {
+    public List<Book> searchByPubDate(String publishDate) {
         return bookPublishDates.get(publishDate);
     }
 }

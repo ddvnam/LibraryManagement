@@ -29,8 +29,8 @@ public class BookItem extends Book{
     private Date dateOfPurchase;
     private BookStatus status;
 
-    public BookItem(String ISBN, String title, String subject, String publisher, String language, int numberOfPages, Author author, Date publicationDate) {
-        super(ISBN, title, subject, publisher, language, numberOfPages, author, publicationDate);
+    public BookItem(String ISBN, String title, String publisher, Author author, String publicationDate) {
+        super(ISBN, title, publisher, author, publicationDate);
     }
 
     public String getBarcode() {
