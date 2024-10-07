@@ -51,17 +51,33 @@ public class Catalog implements Search {
         bookItems.add(bookItem);
     }
 
+    /**
+     * Hàm này sẽ thêm BookItem vào Catalog
+     * @param books
+     * @return true nếu thêm sách thành công, ngược lại trả về false
+     */
     public void loadBookItems(List<Book> books) {
         for (Book book : books) {
             BookItem bookItem = new BookItem(book.getISBN(), book.getTitle(), book.getPublisher(), book.getAuthor(), book.getPublicationDate());
             addBookItem(bookItem);
         }
     }
+    /**
+     * Hàm này sẽ thêm Book vào Catalog
+     * @param books
+     * @return true nếu thêm sách thành công, ngược lại trả về false
+     */
     public void loadBooks(List<Book> books) {
         for (Book book : books) {
             updateCatalog(book);
         }
     }
+
+    /**
+     * Hàm này sẽ thêm Book vào Catalog theo Title , Author, PublishDate
+     * @param newBook
+     * @return true nếu thêm sách thành công, ngược lại trả về false
+     */
     private boolean updateCatalog(Book newBook) {
         addBookToTitleMap(newBook);
         addBookToAuthorMap(newBook);
@@ -69,18 +85,33 @@ public class Catalog implements Search {
         return true;
     }
 
+    /**
+     * Hàm này sẽ thêm Book vào Catalog theo Title
+     * @param newBook
+     * @return true nếu thêm sách thành công, ngược lại trả về false
+     */
     private void addBookToTitleMap(Book newBook) {
         String title = newBook.getTitle().trim();
         bookTitles.putIfAbsent(title, new ArrayList<>());
         bookTitles.get(title).add(newBook);
     }
 
+    /**
+     * Hàm này sẽ thêm Book vào Catalog theo Author
+     * @param newBook
+     * @return true nếu thêm sách thành công, ngược lại trả về false
+     */
     private void addBookToAuthorMap(Book newBook) {
         String authorName = newBook.getAuthor().getName().trim();
         bookAuthors.putIfAbsent(authorName, new ArrayList<>());
         bookAuthors.get(authorName).add(newBook);
     }
 
+    /**
+     * Hàm này sẽ thêm Book vào Catalog theo PublishDate
+     * @param newBook
+     * @return true nếu thêm sách thành công, ngược lại trả về false
+     */
     private void addBookToPublishDateMap(Book newBook) {
         String publishDate = newBook.getPublicationDate();
         bookPublishDates.putIfAbsent(publishDate, new ArrayList<>());
@@ -117,6 +148,11 @@ public class Catalog implements Search {
         return bookPublishDates.get(publishDate);
     }
 
+    /**
+     * Hàm này sẽ trả về BookItem dựa trên Book
+     * @param book
+     * @return BookItem
+     */
     public BookItem getBookItem(Book book) {
         for (BookItem bookItem : bookItems) {
             if (bookItem.getTitle().equals(book.getTitle())) {
@@ -126,6 +162,12 @@ public class Catalog implements Search {
         return null;
     }
 
+    /**
+     * Hàm này sẽ trả về BookItem dựa trên BookItem
+     * Tìm kiếm BookItem trong Catalog dựa trên BookItem
+     * @param bookItem
+     * @return BookItem
+     */
     public BookItem getBookItem(BookItem bookItem) {
         for (BookItem item : bookItems) {
             if (item.getTitle().equals(bookItem.getTitle())) {

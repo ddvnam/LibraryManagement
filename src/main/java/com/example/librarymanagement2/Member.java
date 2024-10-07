@@ -23,6 +23,10 @@ public class Member extends Account{
     }
 
 
+    /**
+     * Hàm này sẽ tìm kiếm sách trong Catalog dựa trên tiêu đề, tác giả hoặc năm xuất bản.
+     * @return kết quả cần tìm
+     */
     public void searchBooks(Catalog catalog) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Select search option:");
@@ -66,6 +70,11 @@ public class Member extends Account{
         }
     }
 
+    /**
+     * Hàm này sẽ cho phép người dùng mượn sách từ Catalog.
+     * @param catalog Catalog chứa thông tin sách
+     * @return kết quả mượn sách
+     */
     public void checkOutBook(Catalog catalog) {
         System.out.println("Please enter the book title you want to checkout: ");
         Scanner scanner = new Scanner(System.in);
@@ -93,6 +102,11 @@ public class Member extends Account{
         }
     }
 
+    /**
+     * Hàm này sẽ cho phép người dùng trả sách vào Catalog.
+     * @param catalog Catalog chứa thông tin sách
+     * @return kết quả trả sách
+     */
     public void returnBook(Catalog catalog) {
         System.out.println("Please enter the book title you want to return: ");
         Scanner scanner = new Scanner(System.in);

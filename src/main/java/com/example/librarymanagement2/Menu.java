@@ -63,6 +63,15 @@ public class Menu {
                     break;
                 case 3:
                     System.out.println("Cancel Account");
+                    System.out.println("Enter username: ");
+                    username = getUserStringInput();
+                    foundAccount = findMemberByUsername(username);
+                    if(foundAccount != null && foundAccount instanceof Member) {
+                        Librarian.cancelMembership((Member) foundAccount);
+                        System.out.println("Account " + username + " has been canceled.");
+                    } else {
+                        System.out.println("Member not found.");
+                    }
                     break;
                 case 4:
                     System.out.println("Check Account Status");
@@ -95,7 +104,11 @@ public class Menu {
         }
         return null;
     }
-
+    /**
+     * Hàm trả về menu cho người dùng
+     * @param member : người dùng
+     * @param catalog: danh mục sách
+     */
     public void showMemberMenu(Member member, Catalog catalog) {
         while (true) {
             System.out.println("\nMember Menu:");
@@ -121,9 +134,6 @@ public class Menu {
                     member.returnBook(catalog);
                     break;
                 case 4:
-                    System.out.println("Renew Book");
-                    break;
-                case 5:
                     System.out.println("Are you sure you want to exit? (Y/N)");
                     char exitChoice = getUserStringInput().trim().charAt(0);
                     if (exitChoice == 'Y' || exitChoice == 'y') {

@@ -72,6 +72,10 @@ public class BookItem extends Book{
         this.numOfCopies = numOfCopies;
     }
 
+    /**
+     * Hàm này sẽ kiểm tra xem sách có thể mượn được không
+     * @return true nếu sách có thể mượn, ngược lại trả về false
+     */
     public boolean checkout() {
         if(this.numOfCopies > 0) {
             this.numOfCopies--;
@@ -83,6 +87,10 @@ public class BookItem extends Book{
         return false;
     }
 
+    /**
+     * Hàm này sẽ kiểm tra xem sách có thể trả được không
+     * @return true nếu sách có thể trả, ngược lại trả về false
+     */
     public boolean checkin() {
         if(this.numOfCopies >= 0) {
             this.numOfCopies++;

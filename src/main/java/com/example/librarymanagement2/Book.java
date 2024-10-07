@@ -58,6 +58,9 @@ public class Book {
         this.publicationDate = publicationDate;
     }
 
+    /**
+     *  Hàm này sẽ hiển thị thông tin của sách
+     */
     public void getInformation() {
         System.out.println("ISBN: " + ISBN);
         System.out.println("Title: " + title);
