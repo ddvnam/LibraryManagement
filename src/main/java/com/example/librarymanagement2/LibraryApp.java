@@ -17,10 +17,10 @@ public class LibraryApp {
 
     public static void main(String[] args) throws IOException {
         // Testing Account
-        accounts.add(new Librarian("lib1", "123"));
-        accounts.add(new Librarian("lib2", "123"));
-        accounts.add(new Member("member1", "123"));
-        accounts.add(new Member("member2", "123"));
+        accounts.add(new Librarian("lib1", "123","dangphamtrung03192005@gmail.com"));
+        accounts.add(new Librarian("lib2", "123","dangphamtrung03192005@gmail.com"));
+        accounts.add(new Member("member1", "123","nnamdamm05@gmail.com"));
+        accounts.add(new Member("member2", "123","dangphamtrung03192005@gmail.com"));
         //Load data
         database.loadData(books, FILE_NAME);
         catalog.loadBooks(books);
@@ -70,6 +70,7 @@ public class LibraryApp {
         return false;
     }
 
+    /* Da thay doi */
     public static boolean Register() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter username: ");
@@ -78,8 +79,10 @@ public class LibraryApp {
         String pass = scanner.nextLine();
         System.out.println("Enter password again: ");
         String pass2 = scanner.nextLine();
+        System.out.println("Enter email again: ");
+        String email = scanner.nextLine();
         if (pass.equals(pass2)) {
-            Account newAccount = new Account(user, pass, Account.AccountStatus.ACTIVE);
+            Account newAccount = new Account(user, pass, email,Account.AccountStatus.ACTIVE);
             newAccount.setRole("member");
             accounts.add(newAccount);
             return true;

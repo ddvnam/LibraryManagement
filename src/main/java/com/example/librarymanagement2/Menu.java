@@ -116,7 +116,8 @@ public class Menu {
             System.out.println("2. Check Out Book");
             System.out.println("3. Return Book");
             System.out.println("4. Renew Book");
-            System.out.println("5. Exit");
+            System.out.println("5. Check Notification");
+            System.out.println("6. Exit");
             System.out.print("Select an option: ");
 
             int choice = getUserInput();
@@ -141,6 +142,27 @@ public class Menu {
                         System.exit(0);
                     } else {
                         showMemberMenu(member, catalog);
+                    }
+                    break;
+                case 5:
+                    member.showPortalNT();
+                    boolean exit = false;
+
+                    if (member.getPortalNT().isEmpty()) {
+                        System.out.println("BẠN KHÔNG CÓ THÔNG BÁO NÀO!");
+                    }
+
+                    while (!member.getPortalNT().isEmpty() && exit == false ) {
+                        System.out.println("0. Thoát xem thông báo hoặc nhập ID thông báo để xem");
+                        int ID = getUserInput();
+                        if (ID == 0) { exit = true; }
+                        else {
+                            member.showPortalNTwithID(ID);
+                            member.showPortalNT();
+                        }
+                        if (member.getPortalNT().isEmpty()) {
+                            System.out.println("BẠN KHÔNG CÓ THÔNG BÁO NÀO!");
+                        }
                     }
                     break;
                 default:

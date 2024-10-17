@@ -7,8 +7,8 @@ public class Member extends Account{
     private int totalBooksCheckedout;
     private List<BookItem> borrowedBooks;
 
-    public Member(String username, String password) {
-        super(username, password, AccountStatus.ACTIVE);
+    public Member(String username, String password, String email) {
+        super(username, password, email ,AccountStatus.ACTIVE);
         this.setRole("member");
         this.dateOfMembership = new Date();
         borrowedBooks = new ArrayList<>();
@@ -95,8 +95,23 @@ public class Member extends Account{
             System.out.println("numOFcopies before checkout: " + bookItem.getNumOfCopies());
             if (bookItem.checkout()) {
                 borrowedBooks.add(bookItem);
+
+                //totalBooksCheckedout++;
+
                 System.out.println("Book checked out successfully.");
                 System.out.println("numOFcopies after checkout: " + bookItem.getNumOfCopies());
+
+                //Gửi email lên portal
+                PortalNotification portal = new PortalNotification(1, new Date(), "BẠN ĐÃ MƯỢN SÁCH THÀNH CÔNG: " + bookItem.getTitle());
+                this.addPortalNT(portal);
+
+                // Gửi email thông báo mượn sách
+                if (!Objects.equals(this.getEmail(), "")) {
+                    String content = "Bạn đã mượn sách thành công: " + bookItem.getTitle();
+                    String subject = "THÔNG BÁO MƯỢN SÁCH";
+                    this.sendEmailNotificationMember(content, subject);// Gửi email tới tài khoản của Member
+                }
+
                 return;
             }
         }
@@ -133,6 +148,19 @@ public class Member extends Account{
                     catalogItem.checkin(); // increase number of copies and change status
                     System.out.println("Book returned successfully.");
                     System.out.println("numOFcopies after return: " + catalogItem.getNumOfCopies());
+
+                    //totalBookCheckout--;
+
+                    //Gửi email về portal
+                    PortalNotification portal = new PortalNotification(1, new Date(), "BẠN ĐÃ TRẢ SÁCH THÀNH CÔNG: " + bookItem.getTitle());
+                    this.addPortalNT(portal);
+
+                    // Gửi email thông báo trả sách
+                    if(!Objects.equals(this.getEmail(), "")) {
+                        String content = "Bạn đã trả sách thành công: " + bookItem.getTitle();
+                        String subject = "THÔNG BÁO TRẢ SÁCH";
+                        this.sendEmailNotificationMember(content, subject);  // Gửi email tới tài khoản của Member
+                    }
                     return;
                 } else {
                     System.out.println("Error: Could not find the book in the catalog.");
@@ -142,4 +170,5 @@ public class Member extends Account{
             System.out.println("You have not borrowed this book.");
         }
     }
+
 }
