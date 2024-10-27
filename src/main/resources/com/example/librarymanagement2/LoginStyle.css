@@ -1,0 +1,60 @@
+.button {
+    -fx-background-color: #20344c;
+    -fx-background-radius: 20;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 20;
+}
+
+.button:hover {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #20344c;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+.layer1 {
+    -fx-background-color: #20344c;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.icon {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 50;
+    -fx-border-radius: 50;
+    -fx-border-color : #d3d3d3;
+}
+
+.icon:hover {
+    -fx-background-color: #d3d3d3;
+    -fx-background-radius: 50;
+    -fx-border-radius: 50;
+    -fx-border-color : #d3d3d3;
+}
+
+.button1 {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20;
+    -fx-text-fill: #20344c;
+    -fx-border-radius: 20;
+}
+
+.button1:hover {
+    -fx-background-color: #20344c;
+    -fx-text-fill: #ffffff;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-border-color: #ffffff;
+}
+
+.textfield {
+    -fx-background-color: #ededed;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.textfield:focused {
+    -fx-border-color: transparent transparent #4A90E2 transparent;
+    -fx-border-width: 0 0 2 0;
+}

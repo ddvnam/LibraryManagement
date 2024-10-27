@@ -15,45 +15,6 @@ public class LibraryApp {
     private static Menu menu = new Menu();
     private static Account currentAccount;
 
-    public static void main(String[] args) throws IOException {
-        // Testing Account
-        accounts.add(new Librarian("lib1", "123","dangphamtrung03192005@gmail.com"));
-        accounts.add(new Librarian("lib2", "123","dangphamtrung03192005@gmail.com"));
-        accounts.add(new Member("member1", "123","nnamdamm05@gmail.com"));
-        accounts.add(new Member("member2", "123","dangphamtrung03192005@gmail.com"));
-        //Load data
-        database.loadData(books, FILE_NAME);
-        catalog.loadBooks(books);
-        catalog.loadBookItems(books);
-
-        while(true) {
-            menu.showMainMenu();
-            int choice = menu.getUserInput();
-            if(choice == 1) {
-                if(Login()) {
-                    System.out.println("Login successful");
-                    if(currentAccount instanceof Librarian) {
-                        menu.showAdminMenu();
-                    }
-                    if(currentAccount instanceof Member) {
-                        menu.showMemberMenu((Member) currentAccount, catalog);
-                    }
-
-                } else {
-                    System.out.println("Login failed");
-                }
-            } else if(choice == 2) {
-                if(Register()) {
-                    System.out.println("Register successful");
-                } else {
-                    System.out.println("Register failed");
-                }
-            } else if(choice == 3) {
-                break;
-            }
-        }
-    }
-
     public static boolean Login() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter username: ");
