@@ -10,6 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+
 
 public class LoginController {
     @FXML
@@ -46,7 +49,11 @@ public class LoginController {
     private ImageView emailLabel;
 
     @FXML
+    private Label errorMessage;
+
+    @FXML
     private void initialize() {
+        errorMessage.setVisible(false);
         signUpButton.setVisible(true);
         signInButton.setVisible(false);
         email.setVisible(false);
@@ -100,5 +107,49 @@ public class LoginController {
         t1.setVisible(true);
         t2.setVisible(false);
         emailLabel.setVisible(false);
+    }
+
+    @FXML
+    private void Login(MouseEvent event) {
+        if (!username.getText().trim().isEmpty() && !password.getText().trim().isEmpty()) {
+            if(LibraryApp.Login(username.getText().trim(), password.getText().trim())) {
+                // go to the home page
+            } else {
+                displayErrorMessage();
+            }
+        } else {
+            System.out.println("Please enter username and password");
+        }
+    }
+
+    @FXML void SignUp(MouseEvent event) {
+        if(!username.getText().trim().isEmpty() && !password.getText().trim().isEmpty() && !email.getText().trim().isEmpty()) {
+            if(checkEmailFormat(email.getText().trim())) {
+                if(LibraryApp.Register(username.getText().trim(), password.getText().trim(), email.getText().trim())) {
+                    System.out.println("Account created successfully");
+                } else {
+                    System.out.println("Username already exists");
+                }
+            } else {
+                System.out.println("Invalid email format");
+            }
+        } else {
+            displayErrorMessage();
+        }
+    }
+
+
+    private boolean checkEmailFormat(String email) {
+        return email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
+    }
+    private void displayErrorMessage() {
+        errorMessage.setVisible(true);
+
+        // Timeline to hide the error message after 1.5 seconds
+        Timeline hideMessage = new Timeline(new KeyFrame(Duration.seconds(1.5), event -> {
+            errorMessage.setVisible(false);
+        }));
+        hideMessage.setCycleCount(1);
+        hideMessage.play();
     }
 }

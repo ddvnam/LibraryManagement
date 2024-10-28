@@ -15,16 +15,9 @@ public class LibraryApp {
     private static Menu menu = new Menu();
     private static Account currentAccount;
 
-    public static boolean Login() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter username: ");
-        String user = scanner.nextLine();
-        System.out.println("Enter password: ");
-        String pass = scanner.nextLine();
-
+    public static boolean Login(String username, String password) {
         for( Account account : accounts) {
-            if(account.validateLogin(user, pass)) {
-                currentAccount = account;
+            if(account.validateLogin(username, password)) {
                 return true;
             }
         }
@@ -32,23 +25,15 @@ public class LibraryApp {
     }
 
     /* Da thay doi */
-    public static boolean Register() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter username: ");
-        String user = scanner.nextLine().trim();
-        System.out.println("Enter password: ");
-        String pass = scanner.nextLine();
-        System.out.println("Enter password again: ");
-        String pass2 = scanner.nextLine();
-        System.out.println("Enter email again: ");
-        String email = scanner.nextLine();
-        if (pass.equals(pass2)) {
-            Account newAccount = new Account(user, pass, email,Account.AccountStatus.ACTIVE);
-            newAccount.setRole("member");
-            accounts.add(newAccount);
+    public static boolean Register(String username, String password, String email) {
+        //check if username already exists
+        if(accounts.stream().anyMatch(account -> account.getUsername().equals(username))) {
+            return false;
+        } else {
+            Account account = new Account(username, password, email, "member");
+            accounts.add(account);
             return true;
         }
-        return false;
     }
 
 }
