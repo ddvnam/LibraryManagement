@@ -3,6 +3,8 @@ package com.example.librarymanagement2;
 import java.util.*;
 
 public class Member extends Account{
+    private Random random = new Random();
+    private double balance;
     private Date dateOfMembership;
     private int totalBooksCheckedout;
     private List<BookItem> borrowedBooks;
@@ -12,6 +14,7 @@ public class Member extends Account{
         this.setRole("member");
         this.dateOfMembership = new Date();
         borrowedBooks = new ArrayList<>();
+        this.balance = random.nextDouble() - 100;
     }
 
     public Member(String username) {
@@ -22,7 +25,13 @@ public class Member extends Account{
         return totalBooksCheckedout;
     }
 
+    public double getBalance() {
+        return balance;
+    }
 
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
     /**
      * Hàm này sẽ tìm kiếm sách trong Catalog dựa trên tiêu đề, tác giả hoặc năm xuất bản.
      * @return kết quả cần tìm
@@ -93,8 +102,15 @@ public class Member extends Account{
                 return;
             }
             System.out.println("numOFcopies before checkout: " + bookItem.getNumOfCopies());
-            if (bookItem.checkout()) {
+
+            if (this.balance < bookItem.getPrice()) {
+                System.out.println("You do not have enough money!");
+            }
+            else if (bookItem.checkout()) {
                 borrowedBooks.add(bookItem);
+                this.setBalance(this.getBalance() - bookItem.getPrice());
+
+                book.getInformation();
 
                 //totalBooksCheckedout++;
 

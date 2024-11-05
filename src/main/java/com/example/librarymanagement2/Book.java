@@ -2,8 +2,11 @@ package com.example.librarymanagement2;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class Book {
+    private Random random = new Random();
+    private double price;
     private String ISBN;
     private String title;
     private String publisher;
@@ -16,6 +19,7 @@ public class Book {
         this.publisher = publisher;
         this.author = author;
         this.publicationDate = publicationDate;
+        this.price = random.nextDouble();
     }
 
     public Author getAuthor() {
@@ -58,6 +62,14 @@ public class Book {
         this.publicationDate = publicationDate;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     /**
      *  Hàm này sẽ hiển thị thông tin của sách
      */
@@ -67,5 +79,6 @@ public class Book {
         System.out.println("Publisher: " + publisher);
         System.out.println("Author: " + author.getName());
         System.out.println("Publication Date: " + publicationDate);
+        System.out.println("Price: " + price);
     }
 }
