@@ -102,7 +102,7 @@ public class Catalog implements Search {
      * @return true nếu thêm sách thành công, ngược lại trả về false
      */
     private void addBookToAuthorMap(Book newBook) {
-        String authorName = newBook.getAuthor().getName().trim();
+        String authorName = newBook.getAuthor().trim();
         bookAuthors.putIfAbsent(authorName, new ArrayList<>());
         bookAuthors.get(authorName).add(newBook);
     }

@@ -10,13 +10,13 @@ public class Librarian extends Account{
         this.setRole("librarian");
     }
 
-    public void addBookItem(String ISBN, String title, String publisher,  Author author, String publicationDate) {
+    public void addBookItem(String ISBN, String title, String publisher,  String author, String publicationDate) {
         BookItem bookItem = new BookItem(ISBN, title, publisher, author, publicationDate);
         LibraryApp.bookItems.add(bookItem);
-        System.out.println("Book added : " + bookItem.getTitle() + " by " + bookItem.getAuthor().getName());
+        System.out.println("Book added : " + bookItem.getTitle() + " by " + bookItem.getAuthor());
     }
 
-    public void editBookItem(BookItem bookItem, String newTitle, Author newAuthor, String newIsbn) {
+    public void editBookItem(BookItem bookItem, String newTitle, String newAuthor, String newIsbn) {
         bookItem.setTitle(newTitle);
         bookItem.setAuthor(newAuthor);
         bookItem.setISBN(newIsbn);

@@ -11,34 +11,16 @@ public class BookItem extends Book{
         UNAVAILABLE,
     }
 
-    private String barcode;
-    private Date dueDate;
     private double price;
-    private Date dateOfPurchase;
     private BookStatus status;
     private int numOfCopies;
 
-    public BookItem(String ISBN, String title, String publisher, Author author, String publicationDate) {
+    public BookItem(String ISBN, String title, String publisher, String author, String publicationDate) {
         super(ISBN, title, publisher, author, publicationDate);
         Random random = new Random();
         this.numOfCopies = random.nextInt(5) + 1;
     }
 
-    public String getBarcode() {
-        return barcode;
-    }
-
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
 
     public double getPrice() {
         return price;
@@ -46,14 +28,6 @@ public class BookItem extends Book{
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public Date getDateOfPurchase() {
-        return dateOfPurchase;
-    }
-
-    public void setDateOfPurchase(Date dateOfPurchase) {
-        this.dateOfPurchase = dateOfPurchase;
     }
 
     public BookStatus getStatus() {

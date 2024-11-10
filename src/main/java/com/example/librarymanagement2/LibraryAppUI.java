@@ -22,7 +22,10 @@ public class LibraryAppUI  extends Application {
 
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(String[] args) throws IOException {
+        Database database = new Database("jdbc:mysql://localhost:3306/librarymanagement", "root", "123456");
+        database.connectToDatabase();
+        database.loadData("D:\\Learning\\Java\\LibraryManagement\\src\\main\\java\\Database\\books.txt");
+        //launch(args);
     }
 }

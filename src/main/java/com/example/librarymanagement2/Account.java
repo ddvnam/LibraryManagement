@@ -16,7 +16,7 @@ public class Account {
      * BLOCKED: tài khoản bị block trong một khoảng thời gian
      */
     public enum AccountStatus {
-        ACTIVE, CANCELED, BLACKLISTED, BLOCKED, NONE
+        ACTIVE, CANCELED, BLOCKED, NONE
     }
 
     private String username; // thay the cho id

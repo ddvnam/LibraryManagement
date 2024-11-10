@@ -7,10 +7,10 @@ public class Book {
     private String ISBN;
     private String title;
     private String publisher;
-    private Author author;
+    private String author;
     private String publicationDate;//only year
 
-    public Book(String isbn, String title, String publisher, Author author, String publicationDate) {
+    public Book(String isbn, String title, String publisher, String author, String publicationDate) {
         this.ISBN = isbn;
         this.title = title;
         this.publisher = publisher;
@@ -18,11 +18,11 @@ public class Book {
         this.publicationDate = publicationDate;
     }
 
-    public Author getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
@@ -65,7 +65,7 @@ public class Book {
         System.out.println("ISBN: " + ISBN);
         System.out.println("Title: " + title);
         System.out.println("Publisher: " + publisher);
-        System.out.println("Author: " + author.getName());
+        System.out.println("Author: " + author);
         System.out.println("Publication Date: " + publicationDate);
     }
 }
