@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `librarymanagement` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `librarymanagement`;
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
 -- Host: localhost    Database: librarymanagement
@@ -30,7 +28,7 @@ CREATE TABLE `account` (
   `password` varchar(255) NOT NULL,
   `accountStatus` enum('ACTIVE','BLOCKED','CANCELLED') DEFAULT 'ACTIVE',
   `role` enum('member','librarian') NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`accountID`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -139,6 +137,9 @@ CREATE TABLE `member` (
   `memberID` int NOT NULL AUTO_INCREMENT,
   `accountID` int DEFAULT NULL,
   `joinDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `name` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `phone` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`memberID`),
   KEY `accountID` (`accountID`),
   CONSTRAINT `member_ibfk_1` FOREIGN KEY (`accountID`) REFERENCES `account` (`accountID`) ON DELETE CASCADE
@@ -223,4 +224,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-10 10:58:24
+-- Dump completed on 2024-11-11 21:59:03
