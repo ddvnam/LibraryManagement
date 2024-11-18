@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="120.0" layoutY="63.0" text="THIS IS ADD SCENE">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <TextField layoutX="201.0" layoutY="152.0" promptText="ISBN" />
+      <TextField layoutX="201.0" layoutY="208.0" promptText="Title" />
+      <TextField layoutX="201.0" layoutY="266.0" promptText="Author" />
+      <TextField layoutX="201.0" layoutY="319.0" promptText="Publication Date" />
+      <TextField layoutX="201.0" layoutY="371.0" promptText="Publisher" />
+      <Button layoutX="256.0" layoutY="543.0" mnemonicParsing="false" text="Add" />
+      <TextField layoutX="201.0" layoutY="423.0" promptText="Image Link" />
+      <TextField layoutX="201.0" layoutY="475.0" promptText="No Copies" />
+   </children>
+</AnchorPane>

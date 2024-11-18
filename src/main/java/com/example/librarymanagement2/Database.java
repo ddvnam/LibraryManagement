@@ -90,17 +90,7 @@ public class Database {
     }
 
 
-    public boolean executeUpdate(String query) {
-        try {
-            connection.createStatement().executeUpdate(query);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    private void execute(String query) {
+    public void executeQueryWithoutResult(String query) {
         try {
             connection.createStatement().execute(query);
         } catch (Exception e) {

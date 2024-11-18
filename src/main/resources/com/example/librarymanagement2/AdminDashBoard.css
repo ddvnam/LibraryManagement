@@ -3,3 +3,16 @@
     -fx-font-weight: bold;
     -fx-fill: #ffffff;
 }
+
+.button {
+    -fx-background-color:  #6699cc;
+    -fx-background-radius: 20;
+}
+
+.button:hover {
+    -fx-border-color: #ffffff;
+}
+
+.button:focus {
+    -fx-border-color: #ffffff;
+}
