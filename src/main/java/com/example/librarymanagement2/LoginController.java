@@ -2,6 +2,9 @@ package com.example.librarymanagement2;
 
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -9,10 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-
+import static com.example.librarymanagement2.LibraryApp.*;
 
 public class LoginController {
     @FXML
@@ -111,14 +115,32 @@ public class LoginController {
 
     @FXML
     private void Login(MouseEvent event) {
-        if (!username.getText().trim().isEmpty() && !password.getText().trim().isEmpty()) {
-            if(LibraryApp.Login(username.getText().trim(), password.getText().trim())) {
-                // go to the home page
-            } else {
-                displayErrorMessage();
+        try {
+            String usernameText = username.getText().trim();
+            String passwordText = password.getText().trim();
+
+            // Input validation
+            if (usernameText.isEmpty() || passwordText.isEmpty()) {
+                displayErrorMessage("Please enter both username and password.");
+                return;
             }
-        } else {
-            System.out.println("Please enter username and password");
+
+            // Attempt to log in
+            Stage loginStage = LibraryApp.Login(usernameText, passwordText);
+            if (loginStage != null) {
+                // Load the main application window
+                Scene newScene = new Scene(FXMLLoader.load(getClass().getResource("AdminDashBoard.fxml")));
+                loginStage.setScene(newScene);
+                loginStage.show(); // Show the new scene
+            } else {
+                // Display an error message if the login attempt failed
+                displayErrorMessage("Invalid username or password.");
+            }
+        } catch (Exception e) {
+            // Log the exception for debugging purposes
+            e.printStackTrace();
+            // Display a user-friendly error message
+            displayErrorMessage("An error occurred. Please try again later.");
         }
     }
 
@@ -128,7 +150,7 @@ public class LoginController {
                 if(LibraryApp.Register(username.getText().trim(), password.getText().trim(), email.getText().trim())) {
                     System.out.println("Account created successfully");
                 } else {
-                    System.out.println("Username already exists");
+                    displayErrorMessage("Username already exists");
                 }
             } else {
                 System.out.println("Invalid email format");
@@ -151,5 +173,15 @@ public class LoginController {
         }));
         hideMessage.setCycleCount(1);
         hideMessage.play();
+    }
+
+    private void displayErrorMessage(String message) {
+        errorMessage.setVisible(true);
+        errorMessage.setText(message);
+
+        // Timeline to hide the error message after 1.5 seconds
+        Timeline hideMessage = new Timeline(new KeyFrame(Duration.seconds(1.5), event -> {
+            errorMessage.setVisible(false);
+        }));
     }
 }

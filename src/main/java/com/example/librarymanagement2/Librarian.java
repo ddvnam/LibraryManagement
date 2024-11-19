@@ -11,9 +11,7 @@ public class Librarian extends Account{
     }
 
     public void addBookItem(String ISBN, String title, String publisher,  String author, String publicationDate) {
-        BookItem bookItem = new BookItem(ISBN, title, publisher, author, publicationDate);
-        LibraryApp.bookItems.add(bookItem);
-        System.out.println("Book added : " + bookItem.getTitle() + " by " + bookItem.getAuthor());
+        System.out.println("Book added successfully.");
     }
 
     public void editBookItem(BookItem bookItem, String newTitle, String newAuthor, String newIsbn) {
@@ -24,7 +22,6 @@ public class Librarian extends Account{
     }
 
     public void removeBookItem(BookItem bookItem) {
-        LibraryApp.bookItems.remove(bookItem);
         System.out.println("Book removed successfully.");
     }
 

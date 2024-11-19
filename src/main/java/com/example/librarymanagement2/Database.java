@@ -66,6 +66,9 @@ public class Database {
     public void connectToDatabase() {
         try {
             connection = DriverManager.getConnection(url, username, password);
+            if (connection != null) {
+                System.out.println("Connected to the database");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

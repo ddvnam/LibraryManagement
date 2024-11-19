@@ -15065,4 +15065,3 @@ INSERT INTO book_item (book_id, price, no_of_copy) VALUES (LAST_INSERT_ID(), '59
 INSERT INTO book_image (book_id, image_url) VALUES (LAST_INSERT_ID(), 'http://images.amazon.com/images/P/074322535X.01.LZZZZZZZ.jpg');
 
 
-
