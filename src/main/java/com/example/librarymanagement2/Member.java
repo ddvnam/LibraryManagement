@@ -23,10 +23,13 @@ class Member extends Account {
         this.setUsername(username);
         this.setRole("member");
         this.transactionService = transactionService;
+        borrowedBooks = new ArrayList<>();
     }
 
     public Member(String username, String password, String mail) {
         super(username, password, mail, AccountStatus.ACTIVE);
+        borrowedBooks = new ArrayList<>();
+        transactionService = new TransactionService();
     }
 
 

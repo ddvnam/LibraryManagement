@@ -10,14 +10,18 @@ public class Transaction {
     private String bookId;        // ID of the book involved in the transaction
     private String transactionType; // Type of transaction: "BORROW" or "RETURN"
     private LocalDateTime transactionDate; // Date and time of the transaction
+    private LocalDateTime dueDate; // Due date for borrowed books
+    private boolean isOverdue; // Indicates if the transaction is overdue
 
     // Constructor
-    public Transaction(String transactionId, String memberId, String bookId, String transactionType, LocalDateTime transactionDate) {
+    public Transaction(String transactionId, String memberId, String bookId, String transactionType, LocalDateTime transactionDate, LocalDateTime dueDate) {
         this.transactionId = transactionId;
         this.memberId = memberId;
         this.bookId = bookId;
         this.transactionType = transactionType;
         this.transactionDate = transactionDate;
+        this.dueDate = dueDate;
+        this.isOverdue = false;
     }
 
     // Getters and setters
@@ -59,6 +63,21 @@ public class Transaction {
 
     public void setTransactionDate(LocalDateTime transactionDate) {
         this.transactionDate = transactionDate;
+    }
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public boolean isOverdue() {
+        return isOverdue;
+    }
+
+    public void setOverdue(boolean overdue) {
+        isOverdue = overdue;
     }
 
     // Method to display transaction details
