@@ -2,25 +2,34 @@ package com.example.librarymanagement2;
 
 import java.util.*;
 
-public class Member extends Account{
+class Member extends Account {
     private Random random = new Random();
     private double balance;
     private Date dateOfMembership;
     private int totalBooksCheckedout;
     private List<BookItem> borrowedBooks;
+    private TransactionService transactionService;
 
-    public Member(String username, String password, String email) {
-        super(username, password, email ,AccountStatus.ACTIVE);
+    public Member(String username, String password, String email, TransactionService transactionService) {
+        super(username, password, email, AccountStatus.ACTIVE);
         this.setRole("member");
         this.dateOfMembership = new Date();
         borrowedBooks = new ArrayList<>();
-        this.balance = random.nextDouble() - 100;
+        this.balance = random.nextDouble() * 100; // Set balance between 0 and 100
+        this.transactionService = transactionService;
     }
 
-    public Member(String username) {
+    public Member(String username, TransactionService transactionService) {
         this.setUsername(username);
         this.setRole("member");
+        this.transactionService = transactionService;
     }
+
+    public Member(String username, String password, String mail) {
+        super(username, password, mail, AccountStatus.ACTIVE);
+    }
+
+
     public int getTotalBooksCheckedout() {
         return totalBooksCheckedout;
     }
@@ -32,10 +41,7 @@ public class Member extends Account{
     public void setBalance(double balance) {
         this.balance = balance;
     }
-    /**
-     * Hàm này sẽ tìm kiếm sách trong Catalog dựa trên tiêu đề, tác giả hoặc năm xuất bản.
-     * @return kết quả cần tìm
-     */
+
     public void searchBooks(Catalog catalog) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Select search option:");
@@ -67,7 +73,6 @@ public class Member extends Account{
                 return;
         }
 
-        // Display search results
         if (results.isEmpty()) {
             System.out.println("No books found.");
         } else {
@@ -79,11 +84,6 @@ public class Member extends Account{
         }
     }
 
-    /**
-     * Hàm này sẽ cho phép người dùng mượn sách từ Catalog.
-     * @param catalog Catalog chứa thông tin sách
-     * @return kết quả mượn sách
-     */
     public void checkOutBook(Catalog catalog) {
         System.out.println("Please enter the book title you want to checkout: ");
         Scanner scanner = new Scanner(System.in);
@@ -95,7 +95,7 @@ public class Member extends Account{
             return;
         }
 
-        for(Book book : books) {
+        for (Book book : books) {
             BookItem bookItem = catalog.getBookItem(book);
             if (bookItem == null) {
                 System.out.println("Book not available.");
@@ -105,77 +105,60 @@ public class Member extends Account{
 
             if (this.balance < bookItem.getPrice()) {
                 System.out.println("You do not have enough money!");
-            }
-            else if (bookItem.checkout()) {
+            } else if (bookItem.checkout()) {
                 borrowedBooks.add(bookItem);
                 this.setBalance(this.getBalance() - bookItem.getPrice());
-
                 book.getInformation();
 
-                //totalBooksCheckedout++;
+                transactionService.addTransaction(this.getUsername(), bookItem.getISBN(), "BORROW");
 
                 System.out.println("Book checked out successfully.");
                 System.out.println("numOFcopies after checkout: " + bookItem.getNumOfCopies());
 
-                //Gửi email lên portal
                 PortalNotification portal = new PortalNotification(1, new Date(), "BẠN ĐÃ MƯỢN SÁCH THÀNH CÔNG: " + bookItem.getTitle());
                 this.addPortalNT(portal);
 
-                // Gửi email thông báo mượn sách
                 if (!Objects.equals(this.getEmail(), "")) {
                     String content = "Bạn đã mượn sách thành công: " + bookItem.getTitle();
                     String subject = "THÔNG BÁO MƯỢN SÁCH";
-                    this.sendEmailNotificationMember(content, subject);// Gửi email tới tài khoản của Member
+                    this.sendEmailNotificationMember(content, subject);
                 }
-
                 return;
             }
         }
     }
 
-    /**
-     * Hàm này sẽ cho phép người dùng trả sách vào Catalog.
-     * @param catalog Catalog chứa thông tin sách
-     * @return kết quả trả sách
-     */
     public void returnBook(Catalog catalog) {
         System.out.println("Please enter the book title you want to return: ");
         Scanner scanner = new Scanner(System.in);
         String title = scanner.nextLine();
         List<BookItem> returnedBooks = new ArrayList<>();
 
-        // Find the book in the member's borrowed books list
-        for(BookItem bookItem : borrowedBooks) {
+        for (BookItem bookItem : borrowedBooks) {
             if (bookItem.getTitle().equals(title)) {
                 returnedBooks.add(bookItem);
             }
         }
 
-        // If the book was found in the member's borrowed list
         if (!returnedBooks.isEmpty()) {
-            for(BookItem bookItem : returnedBooks) {
-                // Remove the book from the member's borrowed list
+            for (BookItem bookItem : returnedBooks) {
                 borrowedBooks.remove(bookItem);
-
-                // Update the catalog to reflect the return
                 BookItem catalogItem = catalog.getBookItem(bookItem);
                 System.out.println("numOFcopies before return: " + catalogItem.getNumOfCopies());
                 if (catalogItem != null) {
-                    catalogItem.checkin(); // increase number of copies and change status
+                    catalogItem.checkin();
                     System.out.println("Book returned successfully.");
                     System.out.println("numOFcopies after return: " + catalogItem.getNumOfCopies());
 
-                    //totalBookCheckout--;
+                    transactionService.addTransaction(this.getUsername(), bookItem.getISBN(), "RETURN");
 
-                    //Gửi email về portal
                     PortalNotification portal = new PortalNotification(1, new Date(), "BẠN ĐÃ TRẢ SÁCH THÀNH CÔNG: " + bookItem.getTitle());
                     this.addPortalNT(portal);
 
-                    // Gửi email thông báo trả sách
-                    if(!Objects.equals(this.getEmail(), "")) {
+                    if (!Objects.equals(this.getEmail(), "")) {
                         String content = "Bạn đã trả sách thành công: " + bookItem.getTitle();
                         String subject = "THÔNG BÁO TRẢ SÁCH";
-                        this.sendEmailNotificationMember(content, subject);  // Gửi email tới tài khoản của Member
+                        this.sendEmailNotificationMember(content, subject);
                     }
                     return;
                 } else {
@@ -186,5 +169,4 @@ public class Member extends Account{
             System.out.println("You have not borrowed this book.");
         }
     }
-
 }

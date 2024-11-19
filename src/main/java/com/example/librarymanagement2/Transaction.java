@@ -1,0 +1,76 @@
+package com.example.librarymanagement2;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Transaction {
+    private String transactionId; // Unique ID for the transaction
+    private String memberId;      // ID of the member making the transaction
+    private String bookId;        // ID of the book involved in the transaction
+    private String transactionType; // Type of transaction: "BORROW" or "RETURN"
+    private LocalDateTime transactionDate; // Date and time of the transaction
+
+    // Constructor
+    public Transaction(String transactionId, String memberId, String bookId, String transactionType, LocalDateTime transactionDate) {
+        this.transactionId = transactionId;
+        this.memberId = memberId;
+        this.bookId = bookId;
+        this.transactionType = transactionType;
+        this.transactionDate = transactionDate;
+    }
+
+    // Getters and setters
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
+    }
+
+    public String getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
+    }
+
+    public LocalDateTime getTransactionDate() {
+        return transactionDate;
+    }
+
+    public void setTransactionDate(LocalDateTime transactionDate) {
+        this.transactionDate = transactionDate;
+    }
+
+    // Method to display transaction details
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "transactionId='" + transactionId + '\'' +
+                ", memberId='" + memberId + '\'' +
+                ", bookId='" + bookId + '\'' +
+                ", transactionType='" + transactionType + '\'' +
+                ", transactionDate=" + transactionDate +
+                '}';
+    }
+}
+
