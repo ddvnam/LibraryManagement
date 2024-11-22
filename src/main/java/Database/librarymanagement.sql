@@ -38,10 +38,10 @@ CREATE TABLE IF NOT EXISTS account (
 CREATE TABLE IF NOT EXISTS account_info (
     account_info_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NULL,
     email VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(255) NOT NULL,
-    address VARCHAR(255) NOT NULL
+    phone_number VARCHAR(255) NULL,
+    address VARCHAR(255) NULL
 );
 
 CREATE TABLE IF NOT EXISTS notification (

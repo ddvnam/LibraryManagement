@@ -19,7 +19,7 @@ public class LibraryApp {
     //data
     private static String URL = "jdbc:mysql://localhost:3306/librarymanagement";
     private static String USERNAME = "root";
-    private static String PASSWORD = "";
+    private static String PASSWORD = "123456";
     public static final Database db = new Database(URL, USERNAME, PASSWORD);
 
     //UI
@@ -54,7 +54,22 @@ public class LibraryApp {
 
     /* Da thay doi */
     public static boolean Register(String username, String password, String email) {
-        return true;
+        // Check if username already exists
+        String query = String.format("SELECT * FROM account WHERE username = '%s'", username);
+        ResultSet result = db.executeQuery(query);
+        try {
+            if (result.next()) {
+                return false;
+            } else {
+                // Insert new account
+                query = String.format("INSERT INTO account (username, password) VALUES ('%s', '%s')", username, password);
+                String query1 = String.format("INSERT INTO account_info (account_id,email) VALUES (LAST_INSERT_ID(),'%s')", email);
+                db.executeQueryWithoutResult(query);
+                db.executeQueryWithoutResult(query1);
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
-
 }

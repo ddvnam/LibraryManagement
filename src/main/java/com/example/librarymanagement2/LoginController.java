@@ -3,12 +3,8 @@ package com.example.librarymanagement2;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -16,7 +12,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import static com.example.librarymanagement2.LibraryApp.*;
 
 public class LoginController {
     @FXML
@@ -53,11 +48,10 @@ public class LoginController {
     private ImageView emailLabel;
 
     @FXML
-    private Label errorMessage;
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
     @FXML
     private void initialize() {
-        errorMessage.setVisible(false);
         signUpButton.setVisible(true);
         signInButton.setVisible(false);
         email.setVisible(false);
@@ -90,6 +84,9 @@ public class LoginController {
         t1.setVisible(false);
         t2.setVisible(true);
         emailLabel.setVisible(true);
+        username.clear();
+        password.clear();
+        email.clear();
     }
 
 
@@ -111,6 +108,9 @@ public class LoginController {
         t1.setVisible(true);
         t2.setVisible(false);
         emailLabel.setVisible(false);
+        username.clear();
+        password.clear();
+        email.clear();
     }
 
     @FXML
@@ -145,43 +145,33 @@ public class LoginController {
     }
 
     @FXML void SignUp(MouseEvent event) {
-        if(!username.getText().trim().isEmpty() && !password.getText().trim().isEmpty() && !email.getText().trim().isEmpty()) {
-            if(checkEmailFormat(email.getText().trim())) {
-                if(LibraryApp.Register(username.getText().trim(), password.getText().trim(), email.getText().trim())) {
-                    System.out.println("Account created successfully");
+        String usernameText = username.getText().trim();
+        String passwordText = password.getText().trim();
+        String emailText = email.getText().trim();
+        if(usernameText.isEmpty() || passwordText.isEmpty() || emailText.isEmpty()) {
+            displayErrorMessage("Please enter all required fields.");
+            return;
+        } else {
+            if(checkEmailFormat(emailText)) {
+                if(LibraryApp.Register(usernameText, passwordText, emailText)) {
+                    displayErrorMessage("Account created successfully.");
                 } else {
-                    displayErrorMessage("Username already exists");
+                    displayErrorMessage("Username already exists.");
                 }
             } else {
-                System.out.println("Invalid email format");
+                displayErrorMessage("Invalid email format.");
             }
-        } else {
-            displayErrorMessage();
         }
     }
 
-
     private boolean checkEmailFormat(String email) {
-        return email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
-    }
-    private void displayErrorMessage() {
-        errorMessage.setVisible(true);
-
-        // Timeline to hide the error message after 1.5 seconds
-        Timeline hideMessage = new Timeline(new KeyFrame(Duration.seconds(1.5), event -> {
-            errorMessage.setVisible(false);
-        }));
-        hideMessage.setCycleCount(1);
-        hideMessage.play();
+        return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
     }
 
     private void displayErrorMessage(String message) {
-        errorMessage.setVisible(true);
-        errorMessage.setText(message);
-
-        // Timeline to hide the error message after 1.5 seconds
-        Timeline hideMessage = new Timeline(new KeyFrame(Duration.seconds(1.5), event -> {
-            errorMessage.setVisible(false);
-        }));
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
