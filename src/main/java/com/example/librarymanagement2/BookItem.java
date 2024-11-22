@@ -15,10 +15,11 @@ public class BookItem extends Book{
     private BookStatus status;
     private int numOfCopies;
 
-    public BookItem(String ISBN, String title, String publisher, String author, String publicationDate) {
-        super(ISBN, title, publisher, author, publicationDate);
-        Random random = new Random();
-        this.numOfCopies = random.nextInt(5) + 1;
+    public BookItem(String ISBN, String title, String publisher, String author, String publicationDate, double price, int numOfCopies, String imageUrl) {
+        super(ISBN, title, publisher, author, publicationDate, imageUrl);
+        this.price = price;
+        this.numOfCopies = numOfCopies;
+        this.status = BookStatus.AVAILABLE;
     }
 
 

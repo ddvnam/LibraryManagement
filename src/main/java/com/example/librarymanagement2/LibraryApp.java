@@ -15,13 +15,17 @@ import java.util.Scanner;
 public class LibraryApp {
     public static Database database = new Database();
     public static Catalog catalog = new Catalog();
-    public static Account currentAccount;
+    public static Account currentAccount = new Librarian("admin", "admin", "admin");
     //data
     private static String URL = "jdbc:mysql://localhost:3306/librarymanagement";
     private static String USERNAME = "root";
     private static String PASSWORD = "123456";
     public static final Database db = new Database(URL, USERNAME, PASSWORD);
 
+    //dummy data
+    public static BookItem bookItem = new BookItem("1338878921", "Harry Potter and the Sorcerer's Stone"
+            , "Scholastic", "J.K.Rowling", "1998", 149, 10
+            , "https://m.media-amazon.com/images/I/91wKDODkgWL._SY466_.jpg");
     //UI
     public static FXMLLoader fxmlLoader;
     public static Parent root;
@@ -43,7 +47,11 @@ public class LibraryApp {
                 if(!account.next()) {
                     return null;
                 }
-                currentAccount = new Account(account.getString("username"), account.getString("password"), account.getString("email"), account.getString("role"));
+                if (account.getString("role").equals("librarian")) {
+                    currentAccount = new Librarian(account.getString("username"), account.getString("password"), account.getString("email"));
+                } else {
+                    currentAccount = new Member(account.getString("username"), account.getString("password"), account.getString("email"));
+                }
                 System.out.println("Login successful");
                 return stage;
             }

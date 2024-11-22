@@ -57,10 +57,7 @@ public class Catalog implements Search {
      * @return true nếu thêm sách thành công, ngược lại trả về false
      */
     public void loadBookItems(List<Book> books) {
-        for (Book book : books) {
-            BookItem bookItem = new BookItem(book.getISBN(), book.getTitle(), book.getPublisher(), book.getAuthor(), book.getPublicationDate());
-            addBookItem(bookItem);
-        }
+
     }
     /**
      * Hàm này sẽ thêm Book vào Catalog

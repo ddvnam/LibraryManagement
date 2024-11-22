@@ -13,7 +13,8 @@ public class LibraryAppUI  extends Application {
     @Override
     public void start(Stage Primarystage) throws IOException {
         try {
-            fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            //fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
+            fxmlLoader = new FXMLLoader(getClass().getResource("AdminDashBoard.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             stage = Primarystage;
             stage.setTitle("Library Management System");

@@ -9,13 +9,15 @@ public class Book {
     private String publisher;
     private String author;
     private String publicationDate;//only year
+    private String imageUrl;
 
-    public Book(String isbn, String title, String publisher, String author, String publicationDate) {
+    public Book(String isbn, String title, String publisher, String author, String publicationDate, String imageUrl) {
         this.ISBN = isbn;
         this.title = title;
         this.publisher = publisher;
         this.author = author;
         this.publicationDate = publicationDate;
+        this.imageUrl = imageUrl;
     }
 
     public String getAuthor() {
@@ -58,6 +60,13 @@ public class Book {
         this.publicationDate = publicationDate;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
     /**
      *  Hàm này sẽ hiển thị thông tin của sách
      */

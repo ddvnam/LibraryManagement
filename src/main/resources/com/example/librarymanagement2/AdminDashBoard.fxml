@@ -38,7 +38,6 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="127.0" minHeight="0.0" prefHeight="76.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
               </rowConstraints>
@@ -58,32 +57,6 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                      <children>
-                        <Button fx:id="removeBookButton" mnemonicParsing="false" onMouseClicked="#changeScene" stylesheets="@AdminDashBoard.css">
-                           <graphic>
-                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../images/icons8-remove-book-48.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
-                     <children>
-                        <Button fx:id="updateBookButton" mnemonicParsing="false" onMouseClicked="#changeScene" stylesheets="@AdminDashBoard.css">
-                           <graphic>
-                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../images/edit-book-25.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <children>
                         <Button fx:id="showallAccountButton" mnemonicParsing="false" onMouseClicked="#changeScene" stylesheets="@AdminDashBoard.css">
                            <graphic>
                               <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
@@ -95,7 +68,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                      <children>
                         <Button fx:id="showAllBookButton" mnemonicParsing="false" onMouseClicked="#changeScene" stylesheets="@AdminDashBoard.css">
                            <graphic>
@@ -108,7 +81,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Button fx:id="viewTransactionButton" mnemonicParsing="false" onMouseClicked="#changeScene" stylesheets="@AdminDashBoard.css">
                            <graphic>
