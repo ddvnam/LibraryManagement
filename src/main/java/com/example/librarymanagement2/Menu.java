@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Menu {
     private Scanner scanner;
 
+
     public Menu() {
         this.scanner = new Scanner(System.in);
     }
@@ -26,7 +27,10 @@ public class Menu {
             System.out.println("2. Unblock Account");
             System.out.println("3. Cancel Account");
             System.out.println("4. Check Account Status");
-            System.out.println("5. Exit");
+            System.out.println("5. View All Transactions");
+            System.out.println("6. View Member Transactions");
+            System.out.println("7. View Overdue Transactions");
+            System.out.println("8. Exit");
             System.out.print("Select an option: ");
 
             int choice = getUserInput();
@@ -80,9 +84,22 @@ public class Menu {
                     }
                     break;
                 case 5:
+                    System.out.println("Displaying All Transactions:");
+                    LibraryApp.transactionService.displayAllTransactions();
+                    break;
+                case 6:
+                    System.out.println("Enter Member ID to view transactions: ");
+                    String memberId = getUserStringInput();
+                    LibraryApp.transactionService.displayTransactionsByMemberId(memberId);
+                    break;
+                case 7:
+                    System.out.println("Displaying Overdue Transactions:");
+                    LibraryApp.transactionService.displayOverdueTransactions();
+                    break;
+                case 8:
                     System.out.println("Are you sure you want to exit? (Y/N)");
                     char exitChoice = getUserStringInput().trim().charAt(0);
-                    if(exitChoice == 'Y' || exitChoice == 'y') {
+                    if (exitChoice == 'Y' || exitChoice == 'y') {
                         System.out.println("Exiting...");
                         System.exit(0);
                     } else {
@@ -115,7 +132,7 @@ public class Menu {
             System.out.println("1. Search Books");
             System.out.println("2. Check Out Book");
             System.out.println("3. Return Book");
-            System.out.println("4. Renew Book");
+            System.out.println("4. Check Balance");
             System.out.println("5. Check Notification");
             System.out.println("6. Exit");
             System.out.print("Select an option: ");
@@ -135,14 +152,7 @@ public class Menu {
                     member.returnBook(catalog);
                     break;
                 case 4:
-                    System.out.println("Are you sure you want to exit? (Y/N)");
-                    char exitChoice = getUserStringInput().trim().charAt(0);
-                    if (exitChoice == 'Y' || exitChoice == 'y') {
-                        System.out.println("Exiting...");
-                        System.exit(0);
-                    } else {
-                        showMemberMenu(member, catalog);
-                    }
+                    System.out.println("Your current balance is: " + member.getBalance());
                     break;
                 case 5:
                     member.showPortalNT();
@@ -163,6 +173,16 @@ public class Menu {
                         if (member.getPortalNT().isEmpty()) {
                             System.out.println("BẠN KHÔNG CÓ THÔNG BÁO NÀO!");
                         }
+                    }
+                    break;
+                case 6:
+                    System.out.println("Are you sure you want to exit? (Y/N)");
+                    char exitChoice = getUserStringInput().trim().charAt(0);
+                    if (exitChoice == 'Y' || exitChoice == 'y') {
+                        System.out.println("Exiting...");
+                        System.exit(0);
+                    } else {
+                        showMemberMenu(member, catalog);
                     }
                     break;
                 default:

@@ -163,6 +163,7 @@ class Member extends Account {
                         String subject = "THÔNG BÁO TRẢ SÁCH";
                         this.sendEmailNotificationMember(content, subject);
                     }
+                    transactionService.updateOverdueTransactions(); // Cập nhật trạng thái quá hạn của tất cả các giao dịch
                     return;
                 } else {
                     System.out.println("Error: Could not find the book in the catalog.");

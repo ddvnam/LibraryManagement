@@ -10,6 +10,7 @@ public class LibraryApp {
     public static List<Book> books = new ArrayList<>();
     public static List<BookItem> bookItems = new ArrayList<>();
     public static Database database = new Database();
+    public static TransactionService transactionService = new TransactionService();
     public static Catalog catalog = new Catalog();
     public static List<Account> accounts = new ArrayList<>();
     private static Menu menu = new Menu();
@@ -19,8 +20,9 @@ public class LibraryApp {
         // Testing Account
         accounts.add(new Librarian("lib1", "123","dangphamtrung03192005@gmail.com"));
         accounts.add(new Librarian("lib2", "123","dangphamtrung03192005@gmail.com"));
-        accounts.add(new Member("member1", "123","nnamdamm05@gmail.com"));
-        accounts.add(new Member("member2", "123","dangphamtrung03192005@gmail.com"));
+        accounts.add(new Member("member1", "123","nnamdamm05@gmail.com", transactionService));
+        accounts.add(new Member("member2", "123","dangphamtrung03192005@gmail.com", transactionService));
+
         //Load data
         database.loadData(books, FILE_NAME);
         catalog.loadBooks(books);
@@ -28,6 +30,7 @@ public class LibraryApp {
 
         while(true) {
             menu.showMainMenu();
+            transactionService.applyLateFees();
             int choice = menu.getUserInput();
             if(choice == 1) {
                 if(Login()) {
@@ -38,7 +41,6 @@ public class LibraryApp {
                     if(currentAccount instanceof Member) {
                         menu.showMemberMenu((Member) currentAccount, catalog);
                     }
-
                 } else {
                     System.out.println("Login failed");
                 }
@@ -88,6 +90,15 @@ public class LibraryApp {
             return true;
         }
         return false;
+    }
+
+    public static Account getAccountById(String username) {
+        for (Account account : accounts) {
+            if (account.getUsername().equals(username)) {
+                return account;
+            }
+        }
+        return null;
     }
 
 }

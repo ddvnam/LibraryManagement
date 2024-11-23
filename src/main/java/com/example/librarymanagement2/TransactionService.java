@@ -30,8 +30,11 @@ public class TransactionService {
     }
 
     // Method to display all transactions
-    public void displayTransactionHistory() {
+    public void displayAllTransactions() {
         System.out.println("Transaction History:");
+        if (transactionHistory.isEmpty()) {
+            System.out.println("There is no transaction in library");
+        }
         for (Transaction transaction : transactionHistory) {
             System.out.println(transaction);
         }
@@ -65,47 +68,57 @@ public class TransactionService {
                 .collect(Collectors.toList());
     }
 
-    // Method to search transactions by book ID
-    public List<Transaction> searchTransactionsByBook(String bookId) {
-        return transactionHistory.stream()
-                .filter(transaction -> transaction.getBookId().equals(bookId))
-                .collect(Collectors.toList());
-    }
-
-    // Method to generate and send monthly statements to members
-    public void generateMonthlyStatements() {
-        Map<String, List<Transaction>> memberTransactionsMap = new HashMap<>();
-
-        // Group transactions by member ID
-        for (Transaction transaction : transactionHistory) {
-            if (!memberTransactionsMap.containsKey(transaction.getMemberId())) {
-                memberTransactionsMap.put(transaction.getMemberId(), new ArrayList<>());
-            }
-            memberTransactionsMap.get(transaction.getMemberId()).add(transaction);
-        }
-
-        // Generate statements for each member
-        for (Map.Entry<String, List<Transaction>> entry : memberTransactionsMap.entrySet()) {
-            String memberId = entry.getKey();
-            List<Transaction> transactions = entry.getValue();
-
-            System.out.println("\nMonthly Statement for Member ID: " + memberId);
-            System.out.println("------------------------------------------------");
-            double totalBorrowedCost = 0;
+    public void displayTransactionsByMemberId(String memberId) {
+        List<Transaction> transactions = searchTransactionsByMember(memberId);
+        if (transactions.isEmpty()) {
+            System.out.println("No transactions found for Member ID: " + memberId);
+        } else {
+            System.out.println("Transactions for Member ID: " + memberId);
             for (Transaction transaction : transactions) {
                 System.out.println(transaction);
-                if (transaction.getTransactionType().equals("BORROW")) {
-                    // Assuming we have a way to get the cost of the book from the book ID (pseudo-code)
-                    double bookCost = getBookPriceById(transaction.getBookId());
-                    totalBorrowedCost += bookCost;
-                }
             }
-            System.out.println("Total Borrowed Cost: " + totalBorrowedCost);
-            System.out.println("------------------------------------------------");
         }
     }
 
-    // Pseudo-method to get book price by ID (this should be linked to the actual catalog)
+    public void applyLateFees() {
+        LocalDateTime now = LocalDateTime.now();
+        for (Transaction transaction : transactionHistory) {
+            if (transaction.getTransactionType().equals("BORROW") && transaction.getDueDate() != null && now.isAfter(transaction.getDueDate())) {
+                long daysOverdue = java.time.Duration.between(transaction.getDueDate(), now).toDays();
+                if (daysOverdue > 0) {
+                    transaction.setOverdue(true);
+                    double lateFee = daysOverdue * 1.0; // Ví dụ: Phí phạt là 1 đơn vị tiền tệ cho mỗi ngày trễ.
+
+                    // Tìm thành viên và cập nhật phí phạt
+                    Account memberAccount = LibraryApp.getAccountById(transaction.getMemberId());
+                    if (memberAccount != null && memberAccount instanceof Member) {
+                        Member member = (Member) memberAccount;
+                        member.setBalance(member.getBalance() - lateFee);
+                        System.out.println("Late fee of " + lateFee + " applied to member: " + member.getUsername());
+
+                        // Gửi thông báo cổng thông tin (Portal Notification)
+                        PortalNotification portalNotification = new PortalNotification(
+                                1, new Date(),
+                                "Bạn đã bị phạt " + lateFee + " do trễ hạn trả sách cho cuốn sách có ID: " + transaction.getBookId()
+                        );
+                        member.addPortalNT(portalNotification);
+
+                        // Gửi thông báo email nếu có email được cung cấp
+                        if (!member.getEmail().isEmpty()) {
+                            String content = "Bạn đã bị phạt " + lateFee + " do trễ hạn trả sách. Vui lòng hoàn thành thanh toán để tiếp tục sử dụng dịch vụ thư viện.";
+                            String subject = "THÔNG BÁO PHẠT TRỄ HẠN";
+                            member.sendEmailNotificationMember(content, subject);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+    // method to get book price by ID
     private double getBookPriceById(String bookId) {
         // For demonstration purposes, returning a fixed price.
         return 10.0;
