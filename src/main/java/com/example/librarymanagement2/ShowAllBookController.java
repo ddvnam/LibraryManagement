@@ -8,8 +8,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
+import javafx.scene.input.MouseEvent;
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
@@ -39,8 +40,15 @@ public class ShowAllBookController implements Initializable {
 
     private ObservableList<BookItem> bookList = FXCollections.observableArrayList();
 
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Button searchButton;
+    @FXML ChoiceBox<String> searchType = new ChoiceBox<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        searchType.getItems().addAll("Title", "Author", "ISBN", "Publication Date");
         table.setEditable(true);
         loadData();
     }
@@ -204,6 +212,70 @@ public class ShowAllBookController implements Initializable {
                 errorAlert.setContentText("An error occurred. Please try again later.");
                 errorAlert.showAndWait();
             }
+        }
+    }
+
+    @FXML
+    public void handleSearch(MouseEvent event) {
+        String searchValue = searchField.getText().trim().toLowerCase();
+        String searchTypeValue = searchType.getValue();
+
+        if (searchTypeValue == null || searchValue.isEmpty()) {
+            refreshTable();
+            return;
+        }
+
+        searchValue = searchValue.replace("%", "\\%").replace("_", "\\_");
+
+        String query = "SELECT * FROM book JOIN book_item ON book.book_id = book_item.book_id WHERE ";
+        switch (searchTypeValue) {
+            case "Title":
+                query += "LOWER(title) LIKE ?";
+                break;
+            case "Author":
+                query += "LOWER(author) LIKE ?";
+                break;
+            case "ISBN":
+                query += "ISBN LIKE ?";
+                break;
+            case "Publication Date":
+                query += "publication_date LIKE ?";
+                break;
+            default:
+                query += "LOWER(title) LIKE ?";
+                break;
+        }
+
+        try (PreparedStatement statement = db.getConnection().prepareStatement(query)) {
+            statement.setString(1, "%" + searchValue + "%");
+            ResultSet resultSet = statement.executeQuery();
+            bookList.clear();
+
+            while (resultSet.next()) {
+                BookItem bookItem = new BookItem(
+                        resultSet.getString("ISBN"),
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getString("publisher"),
+                        resultSet.getString("publication_date"),
+                        resultSet.getInt("no_of_copy"),
+                        resultSet.getDouble("price")
+                );
+                bookList.add(bookItem);
+            }
+
+            if (bookList.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "No books found matching your criteria.");
+                alert.show();
+            }
+
+            table.setItems(bookList);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Error while executing the search query.");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred while fetching the search results. Please try again.");
+            alert.show();
         }
     }
 }

@@ -3,10 +3,12 @@ package com.example.librarymanagement2;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -24,10 +26,10 @@ public class AdminDashBoardController {
     @FXML
     private Button showAllBookButton;
     @FXML
-    private ChoiceBox<String> searchType = new ChoiceBox<>();
+    private Button logoutButton;
     @FXML
     private void initialize() {
-        searchType.getItems().addAll("Title", "Author", "ISBN", "Publication Date");
+
     }
 
     public void changeScene(MouseEvent event) {
@@ -64,5 +66,17 @@ public class AdminDashBoardController {
         AnchorPane.setBottomAnchor(root, 0.0);
         AnchorPane.setLeftAnchor(root, 0.0);
         AnchorPane.setRightAnchor(root, 0.0);
+    }
+
+    public void handleLogout(MouseEvent event) {
+        try {
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("Login.fxml")));
+            Stage stage = (Stage) logoutButton.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Failed to load FXML file: " + e.getMessage());
+        }
     }
 }

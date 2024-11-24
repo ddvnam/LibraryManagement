@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,7 +16,7 @@
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="324.0" style="-fx-background-color: #6699cc;">
          <children>
-            <VBox alignment="CENTER" prefHeight="269.0" prefWidth="350.0">
+            <VBox alignment="CENTER" prefHeight="248.0" prefWidth="350.0">
                <children>
                   <Label styleClass="title" stylesheets="@AdminDashBoard.css" text="HI , ADMIN NAME" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -32,10 +30,10 @@
                   </Label>
                </children>
             </VBox>
-            <GridPane alignment="CENTER_RIGHT" layoutY="411.0" prefHeight="190.0" prefWidth="350.0">
+            <GridPane alignment="CENTER_RIGHT" layoutY="248.0" prefHeight="190.0" prefWidth="350.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
@@ -55,7 +53,7 @@
                         </Button>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                  <VBox alignment="CENTER" prefHeight="90.0" prefWidth="149.0" GridPane.columnIndex="1">
                      <children>
                         <Button fx:id="showallAccountButton" mnemonicParsing="false" onMouseClicked="#changeScene" stylesheets="@AdminDashBoard.css">
                            <graphic>
@@ -96,23 +94,17 @@
                   </VBox>
                </children>
             </GridPane>
-            <AnchorPane layoutY="270.0" prefHeight="131.0" prefWidth="350.0">
-               <children>
-                  <TextField fx:id="searchField" layoutX="93.0" layoutY="42.0" prefHeight="48.0" />
-                  <ChoiceBox fx:id="searchType" layoutX="242.0" layoutY="42.0" prefHeight="48.0" prefWidth="64.0" />
-                  <Button fx:id="searchButton" layoutX="35.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#changeScene" prefHeight="48.0" prefWidth="58.0">
-                     <graphic>
-                        <ImageView fitHeight="42.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../images/search-50.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </AnchorPane>
+            <Button fx:id="logoutButton" layoutX="143.0" layoutY="468.0" mnemonicParsing="false" onMouseClicked="#handleLogout" stylesheets="@AdminDashBoard.css">
+               <graphic>
+                  <ImageView fitHeight="48.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/icons8-logout-rounded-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="contentPane" layoutX="350.0" onMouseClicked="#changeScene" prefHeight="600.0" prefWidth="550.0" />
+      <AnchorPane fx:id="contentPane" layoutX="350.0" onMouseClicked="#changeScene" prefHeight="600.0" prefWidth="557.0" />
    </children>
 </Pane>
