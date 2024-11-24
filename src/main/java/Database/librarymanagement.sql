@@ -2,6 +2,7 @@ CREATE DATABASE IF NOT EXISTS librarymanagement;
 
 USE librarymanagement;
 
+-- Create the book table first, as other tables reference it
 CREATE TABLE IF NOT EXISTS book (
     book_id INT PRIMARY KEY AUTO_INCREMENT,
     ISBN VARCHAR(13) NOT NULL UNIQUE,
@@ -11,22 +12,7 @@ CREATE TABLE IF NOT EXISTS book (
     publisher VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS book_image (
-    book_image_id INT PRIMARY KEY AUTO_INCREMENT,
-    book_id INT NOT NULL,
-    image_url VARCHAR(255) NOT NULL,
-    FOREIGN KEY (book_id) REFERENCES book(book_id)
-);
-
-CREATE TABLE IF NOT EXISTS book_item (
-    book_item_id INT PRIMARY KEY AUTO_INCREMENT,
-    book_id INT NOT NULL,
-    status ENUM('available', 'reserved', 'loaned') DEFAULT 'available',
-    no_of_copy INT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (book_id) REFERENCES book(book_id)
-);
-
+-- Create account table first, as account_info and notification reference it
 CREATE TABLE IF NOT EXISTS account (
     account_id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL UNIQUE,
@@ -35,23 +21,45 @@ CREATE TABLE IF NOT EXISTS account (
     role ENUM('librarian', 'member') DEFAULT 'member'
 );
 
+-- Create the book_item table, which references the book table
+CREATE TABLE IF NOT EXISTS book_item (
+    book_item_id INT PRIMARY KEY AUTO_INCREMENT,
+    book_id INT NOT NULL,
+    status ENUM('available', 'reserved', 'loaned') DEFAULT 'available',
+    no_of_copy INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE CASCADE
+);
+
+-- Create the book_image table, which also references the book table
+CREATE TABLE IF NOT EXISTS book_image (
+    book_image_id INT PRIMARY KEY AUTO_INCREMENT,
+    book_id INT NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (book_id) REFERENCES book(book_id) ON DELETE CASCADE
+);
+
+-- Create the account_info table, which references the account table
 CREATE TABLE IF NOT EXISTS account_info (
     account_info_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT NOT NULL,
     name VARCHAR(255) NULL,
     email VARCHAR(255) NOT NULL,
     phone_number VARCHAR(255) NULL,
-    address VARCHAR(255) NULL
+    address VARCHAR(255) NULL,
+    FOREIGN KEY (account_id) REFERENCES account(account_id) ON DELETE CASCADE
 );
 
+-- Create the notification table, which references the account table
 CREATE TABLE IF NOT EXISTS notification (
     notification_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT NOT NULL,
     message VARCHAR(255) NOT NULL,
     created_at DATE NOT NULL,
-    FOREIGN KEY (account_id) REFERENCES account(account_id)
+    FOREIGN KEY (account_id) REFERENCES account(account_id) ON DELETE CASCADE
 );
 
+-- Create the book_loan table, which references both the account and book_item tables
 CREATE TABLE IF NOT EXISTS book_loan (
     book_loan_id INT PRIMARY KEY AUTO_INCREMENT,
     account_id INT NOT NULL,
@@ -59,8 +67,8 @@ CREATE TABLE IF NOT EXISTS book_loan (
     issue_date DATE NOT NULL,
     due_date DATE NOT NULL,
     return_date DATE,
-    FOREIGN KEY (account_id) REFERENCES account(account_id),
-    FOREIGN KEY (book_item_id) REFERENCES book_item(book_item_id)
+    FOREIGN KEY (account_id) REFERENCES account(account_id) ON DELETE CASCADE,
+    FOREIGN KEY (book_item_id) REFERENCES book_item(book_item_id) ON DELETE CASCADE
 );
 
 INSERT INTO book (isbn, title, author, publication_date, publisher) VALUES ('0195153448', 'Classical Mythology', 'Mark P. O. Morford', '2002', 'Oxford University Press');

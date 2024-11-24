@@ -13,12 +13,19 @@ public class BookItem extends Book{
 
     private double price;
     private BookStatus status;
-    private int numOfCopies;
+    private int Copies;
 
-    public BookItem(String ISBN, String title, String publisher, String author, String publicationDate, double price, int numOfCopies, String imageUrl) {
+        public BookItem(String ISBN, String title, String publisher, String author, String publicationDate, double price, int Copies, String imageUrl) {
         super(ISBN, title, publisher, author, publicationDate, imageUrl);
         this.price = price;
-        this.numOfCopies = numOfCopies;
+        this.Copies = Copies;
+        this.status = BookStatus.AVAILABLE;
+    }
+
+    public BookItem(String ISBN, String title, String publisher, String author, String publicationDate,int Copies, double price) {
+        super(ISBN, title, publisher, author, publicationDate);
+        this.price = price;
+        this.Copies = Copies;
         this.status = BookStatus.AVAILABLE;
     }
 
@@ -39,12 +46,12 @@ public class BookItem extends Book{
         this.status = status;
     }
 
-    public int getNumOfCopies() {
-        return numOfCopies;
+    public int getCopies() {
+        return Copies;
     }
 
-    public void setNumOfCopies(int numOfCopies) {
-        this.numOfCopies = numOfCopies;
+    public void setCopies(int numOfCopies) {
+        this.Copies = numOfCopies;
     }
 
     /**
@@ -52,9 +59,9 @@ public class BookItem extends Book{
      * @return true nếu sách có thể mượn, ngược lại trả về false
      */
     public boolean checkout() {
-        if(this.numOfCopies > 0) {
-            this.numOfCopies--;
-            if(this.numOfCopies == 0) {
+        if(this.Copies > 0) {
+            this.Copies--;
+            if(this.Copies == 0) {
                 this.status = BookStatus.UNAVAILABLE;
             }
             return true;
@@ -67,9 +74,9 @@ public class BookItem extends Book{
      * @return true nếu sách có thể trả, ngược lại trả về false
      */
     public boolean checkin() {
-        if(this.numOfCopies >= 0) {
-            this.numOfCopies++;
-            if(this.numOfCopies > 0) {
+        if(this.Copies >= 0) {
+            this.Copies++;
+            if(this.Copies > 0) {
                 this.status = BookStatus.AVAILABLE;
             }
             return true;

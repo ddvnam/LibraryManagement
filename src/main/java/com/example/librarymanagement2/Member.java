@@ -92,14 +92,14 @@ public class Member extends Account{
                 System.out.println("Book not available.");
                 return;
             }
-            System.out.println("numOFcopies before checkout: " + bookItem.getNumOfCopies());
+            System.out.println("numOFcopies before checkout: " + bookItem.getCopies());
             if (bookItem.checkout()) {
                 borrowedBooks.add(bookItem);
 
                 //totalBooksCheckedout++;
 
                 System.out.println("Book checked out successfully.");
-                System.out.println("numOFcopies after checkout: " + bookItem.getNumOfCopies());
+                System.out.println("numOFcopies after checkout: " + bookItem.getCopies());
 
                 //Gửi email lên portal
                 PortalNotification portal = new PortalNotification(1, new Date(), "BẠN ĐÃ MƯỢN SÁCH THÀNH CÔNG: " + bookItem.getTitle());
@@ -143,11 +143,11 @@ public class Member extends Account{
 
                 // Update the catalog to reflect the return
                 BookItem catalogItem = catalog.getBookItem(bookItem);
-                System.out.println("numOFcopies before return: " + catalogItem.getNumOfCopies());
+                System.out.println("numOFcopies before return: " + catalogItem.getCopies());
                 if (catalogItem != null) {
                     catalogItem.checkin(); // increase number of copies and change status
                     System.out.println("Book returned successfully.");
-                    System.out.println("numOFcopies after return: " + catalogItem.getNumOfCopies());
+                    System.out.println("numOFcopies after return: " + catalogItem.getCopies());
 
                     //totalBookCheckout--;
 

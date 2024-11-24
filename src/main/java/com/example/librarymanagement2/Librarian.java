@@ -52,7 +52,7 @@ public class Librarian extends Account{
             psBookItem = conn.prepareStatement(insertBookItemQuery);
             psBookItem.setInt(1, bookId);
             psBookItem.setDouble(2, bookItem.getPrice());
-            psBookItem.setInt(3, bookItem.getNumOfCopies());
+            psBookItem.setInt(3, bookItem.getCopies());
             psBookItem.executeUpdate();
 
             // Insert into the book_image table
@@ -61,23 +61,19 @@ public class Librarian extends Account{
             psBookImage.setString(2, bookItem.getImageUrl());
             psBookImage.executeUpdate();
 
-            conn.commit(); // Commit transaction
+            conn.commit();
             System.out.println("Book added successfully.");
         } catch (Exception e) {
             System.out.println("Error adding book: " + e.getMessage());
             try {
                 if (conn != null) {
-                    conn.rollback(); // Rollback transaction on failure
+                    conn.rollback();
                 }
             } catch (SQLException rollbackEx) {
                 System.out.println("Error rolling back transaction: " + rollbackEx.getMessage());
             }
         } finally {
             try {
-                if (conn != null) {
-                    conn.setAutoCommit(true); // Restore auto-commit
-                    conn.close(); // Close connection
-                }
                 if (psBook != null) psBook.close();
                 if (psBookItem != null) psBookItem.close();
                 if (psBookImage != null) psBookImage.close();

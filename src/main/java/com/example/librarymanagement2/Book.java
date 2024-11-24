@@ -20,6 +20,14 @@ public class Book {
         this.imageUrl = imageUrl;
     }
 
+    public Book(String isbn, String title, String publisher, String author, String publicationDate) {
+        this.ISBN = isbn;
+        this.title = title;
+        this.publisher = publisher;
+        this.author = author;
+        this.publicationDate = publicationDate;
+    }
+
     public String getAuthor() {
         return author;
     }
