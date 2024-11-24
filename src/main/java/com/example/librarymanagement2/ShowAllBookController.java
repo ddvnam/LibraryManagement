@@ -16,8 +16,6 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static com.example.librarymanagement2.LibraryApp.db;
-
 public class ShowAllBookController implements Initializable {
     @FXML
     private TableView<BookItem> table;
@@ -63,7 +61,8 @@ public class ShowAllBookController implements Initializable {
 
         // ResultSet initialization
         ResultSet resultSet = null;
-
+        Database db = new Database();
+        db.connectToDatabase();
         try {
             // Execute the query using db object and store the result
             resultSet = db.executeQuery(query);
@@ -97,6 +96,7 @@ public class ShowAllBookController implements Initializable {
             }
         }
         table.setItems(bookList);
+        db.disConnectDatabase();
     }
 
     private void loadData() {
@@ -168,6 +168,9 @@ public class ShowAllBookController implements Initializable {
         editDialog.getDialogPane().setContent(grid);
 
         Optional<ButtonType> result = editDialog.showAndWait();
+
+        Database db = new Database();
+        db.connectToDatabase();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             String query1 = "UPDATE book SET ISBN = '"
                     + isbnField.getText()
@@ -192,6 +195,7 @@ public class ShowAllBookController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
+        db.disConnectDatabase();
     }
 
     private void handleDelete(BookItem book) {
@@ -199,6 +203,8 @@ public class ShowAllBookController implements Initializable {
         alert.setHeaderText("Delete Book");
         alert.setContentText("Are you sure you want to delete this book?");
         Optional<ButtonType> result = alert.showAndWait();
+        Database db = new Database();
+        db.connectToDatabase();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             // Delete from database
             String query = "DELETE FROM book WHERE ISBN = '" + book.getISBN() + "'";
@@ -213,6 +219,7 @@ public class ShowAllBookController implements Initializable {
                 errorAlert.showAndWait();
             }
         }
+        db.disConnectDatabase();
     }
 
     @FXML
@@ -245,7 +252,8 @@ public class ShowAllBookController implements Initializable {
                 query += "LOWER(title) LIKE ?";
                 break;
         }
-
+        Database db = new Database();
+        db.connectToDatabase();
         try (PreparedStatement statement = db.getConnection().prepareStatement(query)) {
             statement.setString(1, "%" + searchValue + "%");
             ResultSet resultSet = statement.executeQuery();
@@ -277,5 +285,6 @@ public class ShowAllBookController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR, "An error occurred while fetching the search results. Please try again.");
             alert.show();
         }
+        db.disConnectDatabase();
     }
 }

@@ -20,7 +20,6 @@ public class LibraryApp {
     private static String URL = "jdbc:mysql://localhost:3306/librarymanagement";
     private static String USERNAME = "root";
     private static String PASSWORD = "123456";
-    public static final Database db = new Database(URL, USERNAME, PASSWORD);
 
     //dummy data
     public static BookItem bookItem = new BookItem("1338878921", "Harry Potter and the Sorcerer's Stone"
@@ -40,6 +39,8 @@ public class LibraryApp {
                 username, password
         );
         try {
+            Database db = new Database(URL, USERNAME, PASSWORD);
+            db.connectToDatabase();
             ResultSet account = db.executeQuery(query);
             if (account == null) {
                 return null;
@@ -64,6 +65,8 @@ public class LibraryApp {
     public static boolean Register(String username, String password, String email) {
         // Check if username already exists
         String query = String.format("SELECT * FROM account WHERE username = '%s'", username);
+        Database db = new Database(URL, USERNAME, PASSWORD);
+        db.connectToDatabase();
         ResultSet result = db.executeQuery(query);
         try {
             if (result.next()) {

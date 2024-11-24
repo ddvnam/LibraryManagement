@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.Objects;
 import com.example.librarymanagement2.LibraryApp.*;
 
-import static com.example.librarymanagement2.LibraryApp.db;
-
 public class Librarian extends Account{
 
     public Librarian(String username, String password, String email) {
@@ -22,6 +20,7 @@ public class Librarian extends Account{
         String insertBookItemQuery = "INSERT INTO book_item (book_id, price, no_of_copy) VALUES (?, ?, ?)";
         String insertBookImageQuery = "INSERT INTO book_image (book_id, image_url) VALUES (?, ?)";
 
+        Database db = new Database();
         Connection conn = null;
         PreparedStatement psBook = null;
         PreparedStatement psBookItem = null;

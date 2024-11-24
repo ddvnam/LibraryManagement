@@ -26,7 +26,6 @@ public class LibraryAppUI  extends Application {
     }
 
     public static void main(String[] args) throws IOException {
-        db.connectToDatabase();
         launch(args);
     }
 }

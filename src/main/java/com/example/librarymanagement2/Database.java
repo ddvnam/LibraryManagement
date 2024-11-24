@@ -21,6 +21,9 @@ public class Database {
     //Constructor
 
     public Database() {
+        this.url = "jdbc:mysql://localhost:3306/librarymanagement";
+        this.username = "root";
+        this.password = "123456";
     }
 
     public Database(String url, String username, String password) {
