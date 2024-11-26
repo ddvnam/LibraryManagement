@@ -3,11 +3,16 @@ package com.example.librarymanagement2;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
 *Đây là lớp Accouunt dùng để quản lý tài khoản người dùng
  */
 public class Account {
+    private static final ExecutorService portalExecutor = Executors.newFixedThreadPool(5);
+    private static final ExecutorService emailExecutor = Executors.newFixedThreadPool(5);
     /**
      * Đây là enum AccountStatus dùng để quản lý trạng thái của tài khoản
      * ACTIVE: tài khoản đang hoạt động
@@ -115,18 +120,39 @@ public class Account {
 
     //Show toàn bộ thông báo chưa đọc trên portal
     public void showPortalNT() {
-        System.out.println("CÁC THÔNG BÁO CHƯA ĐỌC:");
-        for (int i = 0; i < list_Portalnotice.size(); i++) {
-            if (!list_Portalnotice.get(i).isRead()) {
-                System.out.println( (i + 1)  + " : " + list_Portalnotice.get(i).getCreatedDate() + " " + list_Portalnotice.get(i).getContent());
+        portalExecutor.submit(() -> {
+            System.out.println("CÁC THÔNG BÁO CHƯA ĐỌC:");
+            synchronized (list_Portalnotice) {
+                for (int i = 0; i < list_Portalnotice.size(); i++) {
+                    PortalNotification notification = list_Portalnotice.get(i);
+                    if (!notification.isRead()) {
+                        System.out.println((i + 1) + " : "
+                                + notification.getCreatedDate() + " "
+                                + notification.getContent());
+                    }
+                }
             }
-        }
+        });
     }
     //Show thông báo theo ID người dùng muốn truy cập
     public void showPortalNTwithID (int ID){
-        System.out.println(list_Portalnotice.get(ID - 1).getPortalNTwithID());
-        list_Portalnotice.get(ID-1).setRead(true);
-        list_Portalnotice.remove(ID - 1);
+        portalExecutor.submit(() -> {
+            synchronized (list_Portalnotice) {
+                if (ID > 0 && ID <= list_Portalnotice.size()) {
+                    PortalNotification notification = list_Portalnotice.get(ID - 1);
+                    System.out.println(notification.getPortalNTwithID());
+                    notification.setRead(true);
+                    list_Portalnotice.remove(ID - 1);
+                } else {
+                    System.out.println("Không tìm thấy thông báo với ID: " + ID);
+                }
+            }
+        });
+    }
+
+    // Đảm bảo dừng ExecutorService khi không cần thiết
+    public static void shutdownPortalExecutor() {
+        portalExecutor.shutdown();
     }
 
     public void setNotificationID(int notificationID) { this.notificationID =  notificationID; }
@@ -139,12 +165,26 @@ public class Account {
      * @param subject Chủ đề thông báo (VD: THÔNG BÁO MƯỢN SÁCH, THÔNG BÁO TRẢ SÁCH).
      */
     public void sendEmailNotificationMember(String content, String subject) {
-        EmailNotification notification = new EmailNotification(
+        EmailNotification emailNotification = new EmailNotification(
                 1, new Date(), content, subject
         );
-        notification.sendNotification(this);// Gửi email tới tài khoản của Member
+        EmailNotificationTask emailTask = new EmailNotificationTask(emailNotification, this);
+        emailExecutor.submit(emailTask);
     }
-
+    /**
+     * Đảm bảo tắt ExecutorService khi ứng dụng kết thúc.
+     */
+    public static void shutdownEmailExecutor() {
+        emailExecutor.shutdown();
+        try {
+            if (!emailExecutor.awaitTermination(60, TimeUnit.SECONDS)) {
+                emailExecutor.shutdownNow(); // Buộc dừng nếu quá thời gian chờ
+            }
+        } catch (InterruptedException e) {
+            emailExecutor.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
+    }
     /**
      * Phương thức này dùng để kiểm tra thông tin đăng nhập
      * @param username
