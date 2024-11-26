@@ -16,7 +16,7 @@ public class Account {
      * BLOCKED: tài khoản bị block trong một khoảng thời gian
      */
     public enum AccountStatus {
-        ACTIVE, CANCELED, BLACKLISTED, BLOCKED, NONE
+        ACTIVE, CANCELED, BLOCKED, NONE
     }
 
     private String username; // thay the cho id
@@ -36,6 +36,14 @@ public class Account {
         this.person = new Person();
         this.email = "";
         this.notificationID = 0;
+    }
+
+    public Account(String username, String password, String email, String role) {
+        this.username = username;
+        this.password = password;
+        this.status = AccountStatus.ACTIVE;
+        this.email = email;
+        this.role = role;
     }
 
     /**

@@ -69,12 +69,12 @@
                </font>
             </Label>
             <TextField fx:id="email" layoutX="162.0" layoutY="397.0" prefHeight="40.0" prefWidth="259.0" promptText="Email" styleClass="textfield" stylesheets="@LoginStyle.css" />
-            <Button fx:id="login" layoutX="223.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#slideLayer2ToLayer1" prefHeight="43.0" prefWidth="133.0" styleClass="button1" stylesheets="@LoginStyle.css" text="SignIn">
+            <Button fx:id="login" layoutX="223.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#Login" prefHeight="43.0" prefWidth="133.0" styleClass="button1" stylesheets="@LoginStyle.css" text="SignIn">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="signUp" layoutX="223.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#slideLayer1ToLayer2" prefHeight="43.0" prefWidth="133.0" styleClass="button1" stylesheets="@LoginStyle.css" text="SignUp">
+            <Button fx:id="signUp" layoutX="223.0" layoutY="460.0" mnemonicParsing="false" onMouseClicked="#SignUp" prefHeight="43.0" prefWidth="133.0" styleClass="button1" stylesheets="@LoginStyle.css" text="SignUp">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>

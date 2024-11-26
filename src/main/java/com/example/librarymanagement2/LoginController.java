@@ -2,14 +2,16 @@ package com.example.librarymanagement2;
 
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 
 public class LoginController {
     @FXML
@@ -46,6 +48,9 @@ public class LoginController {
     private ImageView emailLabel;
 
     @FXML
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+    @FXML
     private void initialize() {
         signUpButton.setVisible(true);
         signInButton.setVisible(false);
@@ -79,6 +84,9 @@ public class LoginController {
         t1.setVisible(false);
         t2.setVisible(true);
         emailLabel.setVisible(true);
+        username.clear();
+        password.clear();
+        email.clear();
     }
 
 
@@ -100,5 +108,70 @@ public class LoginController {
         t1.setVisible(true);
         t2.setVisible(false);
         emailLabel.setVisible(false);
+        username.clear();
+        password.clear();
+        email.clear();
+    }
+
+    @FXML
+    private void Login(MouseEvent event) {
+        try {
+            String usernameText = username.getText().trim();
+            String passwordText = password.getText().trim();
+
+            // Input validation
+            if (usernameText.isEmpty() || passwordText.isEmpty()) {
+                displayErrorMessage("Please enter both username and password.");
+                return;
+            }
+
+            // Attempt to log in
+            Stage loginStage = LibraryApp.Login(usernameText, passwordText);
+            if (loginStage != null) {
+                // Load the main application window
+                Scene newScene = new Scene(FXMLLoader.load(getClass().getResource("AdminDashBoard.fxml")));
+                loginStage.setScene(newScene);
+                loginStage.show(); // Show the new scene
+            } else {
+                // Display an error message if the login attempt failed
+                displayErrorMessage("Invalid username or password.");
+            }
+        } catch (Exception e) {
+            // Log the exception for debugging purposes
+            e.printStackTrace();
+            // Display a user-friendly error message
+            displayErrorMessage("An error occurred. Please try again later.");
+        }
+    }
+
+    @FXML void SignUp(MouseEvent event) {
+        String usernameText = username.getText().trim();
+        String passwordText = password.getText().trim();
+        String emailText = email.getText().trim();
+        if(usernameText.isEmpty() || passwordText.isEmpty() || emailText.isEmpty()) {
+            displayErrorMessage("Please enter all required fields.");
+            return;
+        } else {
+            if(checkEmailFormat(emailText)) {
+                if(LibraryApp.Register(usernameText, passwordText, emailText)) {
+                    displayErrorMessage("Account created successfully.");
+                } else {
+                    displayErrorMessage("Username already exists.");
+                }
+            } else {
+                displayErrorMessage("Invalid email format.");
+            }
+        }
+    }
+
+    private boolean checkEmailFormat(String email) {
+        return email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$");
+    }
+
+    private void displayErrorMessage(String message) {
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -38,6 +38,7 @@
     -fx-background-radius: 20;
     -fx-text-fill: #20344c;
     -fx-border-radius: 20;
+    -fx-border-color: #20344c;
 }
 
 .button1:hover {
@@ -45,7 +46,6 @@
     -fx-text-fill: #ffffff;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
-    -fx-border-color: #ffffff;
 }
 
 .textfield {

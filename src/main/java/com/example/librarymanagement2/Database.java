@@ -21,6 +21,9 @@ public class Database {
     //Constructor
 
     public Database() {
+        this.url = "jdbc:mysql://localhost:3306/librarymanagement";
+        this.username = "root";
+        this.password = "123456";
     }
 
     public Database(String url, String username, String password) {
@@ -66,6 +69,9 @@ public class Database {
     public void connectToDatabase() {
         try {
             connection = DriverManager.getConnection(url, username, password);
+            if (connection != null) {
+                System.out.println("Connected to the database");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,47 +95,12 @@ public class Database {
         return resultSet;
     }
 
-    public boolean executeUpdate(String query) {
+
+    public void executeQueryWithoutResult(String query) {
         try {
-            connection.createStatement().executeUpdate(query);
-            return true;
+            connection.createStatement().execute(query);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
-        }
-    }
-
-
-    public void loadData(List<Book> bookList, String fileName) throws IOException {
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            int count = 0;
-
-            // Read each line in the file
-            while ((line = br.readLine()) != null) {
-                // Skip empty lines
-                if (line.trim().isEmpty()) {
-                    continue;
-                }
-
-                String[] data = line.split(",");
-                // Ensure that the array has the correct length
-                if (data.length < 5) {
-                    System.err.println("Invalid line format: " + line);
-                    continue; // Skip this line if it doesn't have enough data
-                }
-
-                // Create a new Author for each book
-                Author author = new Author();
-                author.setName(data[3]);
-
-                // Create a new Book object
-                Book book = new Book(data[0], data[1], data[2], author, data[4]);
-                bookList.add(book);
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
-            throw e;
         }
     }
 }
