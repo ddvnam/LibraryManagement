@@ -1,32 +1,32 @@
 # **Library Management System**
 
 ## **Overview**
-The Library Management System is a Java-based application designed to manage library operations such as managing books, members, borrowing, and returning books. It includes features for both **librarians** and **members**, allowing efficient handling of library tasks with a graphical user interface built using JavaFX.
+Đây là một Hệ thống quản lý thư viện là một ứng dụng dựa trên Java được thiết kế để quản lý các hoạt động của thư viện như quản lý sách, thành viên, mượn và trả sách. Nó bao gồm các tính năng dành cho cả **thủ thư** và **thành viên**, cho phép xử lý hiệu quả các tác vụ của thư viện với giao diện người dùng đồ họa được xây dựng bằng JavaFX.
 
 ---
 
 ## **Features**
 ### For Librarians:
-- Add, update, or delete books.
-- Manage member accounts (block/unblock members).
-- View borrowing history and overdue books.
-- Search for books using title, author, or category.
+- Thêm, cập nhật hoặc xóa sách.
+- Quản lý tài khoản thành viên.
+- Xem lịch sử mượn.
+- Sử dụng tiêu đề, tác giả hoặc danh mục để tìm kiếm sách.
 
 ### For Members:
-- Search for books.
-- Borrow and return books.
-- View borrowing history.
-- Check book availability.
+- Tìm kiếm sách.
+- Mượn và trả lại sách.
+- Xem sách đã mượn.
+- Kiểm tra tính khả dụng của sách.
 
 ---
 
 ## **Technologies Used**
-- **Java**: Core programming language.
-- **JavaFX**: For building the graphical user interface.
-- **JUnit**: For unit testing the application.
-- **MySQL**: Database for storing library data.
-- **Maven**: Build automation and dependency management.
-- **XAMPP**: Local server for MySQL database.
+-**Java**: Ngôn ngữ lập trình chính.
+-** JavaFX**: Được sử dụng để xây dựng giao diện người dùng đồ họa.
+- ** JUnit**: Kiểm tra đơn vị cho ứng dụng.
+-**MySQL**: Cơ sở dữ liệu được sử dụng cho dữ liệu kho lưu trữ.
+Maven**: Xây dựng tự động hóa và quản lý phụ thuộc.
+XAMPP** hoặc MySQL: Máy chủ cục bộ cho cơ sở dữ liệu MySQL.
 
 ---
 
@@ -35,22 +35,22 @@ The Library Management System is a Java-based application designed to manage lib
 
 ## **Setup and Installation**
 ### Prerequisites:
-1. **Java Development Kit (JDK)** - Version 11 or later.
-2. **Maven** - For managing dependencies and building the project.
-3. **MySQL** - Database setup.
-4. **XAMPP** - Local server for MySQL.
+1.Java Development Kit (JDK) ** - Phiên bản 11 hoặc cao hơn.
+2.Maven – Quản lý các dependencies và build project.
+3.**MySQL** - Cài đặt cơ sở dữ liệu.
+4.XAMPP hoặc WorkBench** - MySQL Sever từ phiên bản 9.0.
 
 ### Setup Steps
 1. Clone the repository:
    ```bash
    git clone <repository_url>
    cd <project_directory>
-2. Cài đặt các thư viện cần thiết từ file requirements.txt:
+2. Cài đặt cơ sở dữ liệu:
    ```bash
-   pip instal -r requirements.txt
-3. Chạy file main.py:
+   Mở WorkBench hoặc Xampp sau đó Import file .sql trong Folder java/Database.
+3. Chạy file LiBraryAppUI.java trong IDE hoặc chạy lệnh :
    ```bash
-   python main.py
-4. Truy cập giao diện web và bắt đầu đặt câu hỏi về Thông tin về Trường Đại học Công Nghệ.
+   mvn javafx:run
+4. Truy cập vào ứng dụng và bắt đầu sử dụng.
 
 
