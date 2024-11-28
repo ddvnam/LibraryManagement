@@ -7,10 +7,31 @@ public class Book {
     private String ISBN;
     private String title;
     private String publisher;
-    private Author author;
+    private String author;
     private String publicationDate;//only year
+    private String imageUrl;
+    private String description;
 
-    public Book(String isbn, String title, String publisher, Author author, String publicationDate) {
+    public Book(String isbn, String title, String publisher, String author, String publicationDate, String description) {
+        this.ISBN = isbn;
+        this.title = title;
+        this.publisher = publisher;
+        this.author = author;
+        this.publicationDate = publicationDate;
+        this.description = description;
+    }
+
+    public Book(String isbn, String title, String publisher, String author, String publicationDate, String imageUrl, String description) {
+        this.ISBN = isbn;
+        this.title = title;
+        this.publisher = publisher;
+        this.author = author;
+        this.publicationDate = publicationDate;
+        this.imageUrl = imageUrl;
+        this.description = description;
+    }
+
+    public Book(String isbn, String title, String publisher, String author, String publicationDate) {
         this.ISBN = isbn;
         this.title = title;
         this.publisher = publisher;
@@ -18,11 +39,25 @@ public class Book {
         this.publicationDate = publicationDate;
     }
 
-    public Author getAuthor() {
+    public Book(String bookName, String author, String year) {
+        this.title = bookName;
+        this.author = author;
+        this.publicationDate = year;
+    }
+
+    public Book(String isbn,String bookName, String author, String year) {
+        this.ISBN = isbn;
+        this.title = bookName;
+        this.author = author;
+        this.publicationDate = year;
+    }
+
+
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
@@ -58,14 +93,19 @@ public class Book {
         this.publicationDate = publicationDate;
     }
 
-    /**
-     *  Hàm này sẽ hiển thị thông tin của sách
-     */
-    public void getInformation() {
-        System.out.println("ISBN: " + ISBN);
-        System.out.println("Title: " + title);
-        System.out.println("Publisher: " + publisher);
-        System.out.println("Author: " + author.getName());
-        System.out.println("Publication Date: " + publicationDate);
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

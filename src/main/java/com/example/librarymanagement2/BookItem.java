@@ -5,40 +5,55 @@ import java.util.Random;
 
 public class BookItem extends Book{
 
+    public BookItem(String bookName, String author, String year, double price, String imageUrl) {
+        super(bookName, author, year, imageUrl);
+        this.price = price;
+        this.status = BookStatus.AVAILABLE;
+        this.Copies = 1;
+    }
+
+    public BookItem(String isbn, String bookName, String author, String year, double price) {
+        super(isbn, bookName, author ,year);
+        this.price = price;
+    }
+
     public enum BookStatus {
         AVAILABLE,
         RESERVED,
         UNAVAILABLE,
     }
 
-    private String barcode;
-    private Date dueDate;
     private double price;
-    private Date dateOfPurchase;
     private BookStatus status;
-    private int numOfCopies;
+    private int Copies;
+    public BookItem(String bookName, String author, String year, double price)
+    {
+        super(bookName, author, year);
+        this.price = price;
+    }
 
-    public BookItem(String ISBN, String title, String publisher, Author author, String publicationDate) {
+    public BookItem(String ISBN, String title, String publisher, String author, String publicationDate, double price, int Copies, String description) {
+        super(ISBN, title, publisher, author, publicationDate, description);
+        this.price = price;
+        this.Copies = Copies;
+        this.status = BookStatus.AVAILABLE;
+    }
+
+    public BookItem(String ISBN, String title, String publisher, String author, String publicationDate, double price, int copies, String imageUrl, String description) {
+        super(ISBN, title, publisher, author, publicationDate, imageUrl, description);
+        this.price = price;
+        this.Copies = copies;
+        this.status = BookStatus.AVAILABLE;
+    }
+
+
+    public BookItem(String ISBN, String title, String publisher, String author, String publicationDate,int Copies, double price) {
         super(ISBN, title, publisher, author, publicationDate);
-        Random random = new Random();
-        this.numOfCopies = random.nextInt(5) + 1;
+        this.price = price;
+        this.Copies = Copies;
+        this.status = BookStatus.AVAILABLE;
     }
 
-    public String getBarcode() {
-        return barcode;
-    }
-
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
-    }
-
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
 
     public double getPrice() {
         return price;
@@ -46,14 +61,6 @@ public class BookItem extends Book{
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public Date getDateOfPurchase() {
-        return dateOfPurchase;
-    }
-
-    public void setDateOfPurchase(Date dateOfPurchase) {
-        this.dateOfPurchase = dateOfPurchase;
     }
 
     public BookStatus getStatus() {
@@ -64,12 +71,12 @@ public class BookItem extends Book{
         this.status = status;
     }
 
-    public int getNumOfCopies() {
-        return numOfCopies;
+    public int getCopies() {
+        return Copies;
     }
 
-    public void setNumOfCopies(int numOfCopies) {
-        this.numOfCopies = numOfCopies;
+    public void setCopies(int numOfCopies) {
+        this.Copies = numOfCopies;
     }
 
     /**
@@ -77,9 +84,9 @@ public class BookItem extends Book{
      * @return true nếu sách có thể mượn, ngược lại trả về false
      */
     public boolean checkout() {
-        if(this.numOfCopies > 0) {
-            this.numOfCopies--;
-            if(this.numOfCopies == 0) {
+        if(this.Copies > 0) {
+            this.Copies--;
+            if(this.Copies == 0) {
                 this.status = BookStatus.UNAVAILABLE;
             }
             return true;
@@ -92,9 +99,9 @@ public class BookItem extends Book{
      * @return true nếu sách có thể trả, ngược lại trả về false
      */
     public boolean checkin() {
-        if(this.numOfCopies >= 0) {
-            this.numOfCopies++;
-            if(this.numOfCopies > 0) {
+        if(this.Copies >= 0) {
+            this.Copies++;
+            if(this.Copies > 0) {
                 this.status = BookStatus.AVAILABLE;
             }
             return true;

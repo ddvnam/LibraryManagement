@@ -1,13 +1,16 @@
 package com.example.librarymanagement2;
 
+import javafx.beans.value.ObservableValue;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
-*Đây là lớp Accouunt dùng để quản lý tài khoản người dùng
+ *Đây là lớp Accouunt dùng để quản lý tài khoản người dùng
  */
 public class Account {
+
     /**
      * Đây là enum AccountStatus dùng để quản lý trạng thái của tài khoản
      * ACTIVE: tài khoản đang hoạt động
@@ -16,9 +19,9 @@ public class Account {
      * BLOCKED: tài khoản bị block trong một khoảng thời gian
      */
     public enum AccountStatus {
-        ACTIVE, CANCELED, BLACKLISTED, BLOCKED, NONE
+        ACTIVE, CANCELED, BLOCKED, NONE
     }
-
+    private int id;
     private String username; // thay the cho id
     private String password;
     private AccountStatus status;
@@ -36,6 +39,23 @@ public class Account {
         this.person = new Person();
         this.email = "";
         this.notificationID = 0;
+    }
+
+    public Account(String username, String password, String email, String role) {
+        this.username = username;
+        this.password = password;
+        this.status = AccountStatus.ACTIVE;
+        this.email = email;
+        this.role = role;
+    }
+
+    public Account(int id, String username, String password, String email, String role, String status) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.status = stringToAccountStatus(status);
+        this.email = email;
+        this.role = role;
     }
 
     /**
@@ -109,6 +129,14 @@ public class Account {
 
     public void setEmail(String email) { this.email = email; }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void addPortalNT(PortalNotification portal) { list_Portalnotice.add(portal); }
 
     public List<PortalNotification> getPortalNT() { return list_Portalnotice; }
@@ -160,5 +188,37 @@ public class Account {
     }
     public boolean resetPassword() {
         return true;
+    }
+
+    public static AccountStatus stringToAccountStatus(String status) {
+        if (status == null) {
+            return AccountStatus.NONE; // Default value if the input is null
+        }
+        switch (status.toLowerCase()) {
+            case "active":
+                return AccountStatus.ACTIVE;
+            case "canceled":
+                return AccountStatus.CANCELED;
+            case "blocked":
+                return AccountStatus.BLOCKED;
+            default:
+                return AccountStatus.NONE; // Default for unknown values
+        }
+    }
+
+    public static String accountStatusToString(AccountStatus status) {
+        if (status == null) {
+            return "none"; // Default value if the input is null
+        }
+        switch (status) {
+            case ACTIVE:
+                return "active";
+            case CANCELED:
+                return "canceled";
+            case BLOCKED:
+                return "blocked";
+            default:
+                return "none"; // Default for unknown values
+        }
     }
 }

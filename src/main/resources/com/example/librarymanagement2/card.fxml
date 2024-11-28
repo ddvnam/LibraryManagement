@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="bookAuthor_HBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="420.0" styleClass="background-radius" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement2.CardAuthorController">
+   <children>
+      <ImageView fx:id="bookAuthor_image" fitHeight="175.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../file_images/5e51ed485ef00.jpg" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" maxWidth="-Infinity" prefHeight="200.0" prefWidth="260.0">
+         <children>
+            <Label fx:id="bookAuthor_title" alignment="CENTER" contentDisplay="CENTER" prefHeight="90.0" prefWidth="255.0" styleClass="wrapText" stylesheets="@Styles.css" text="Toi Di Hoc" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="Berlin Sans FB Bold" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="bookAuthor_author" alignment="CENTER" prefHeight="26.0" prefWidth="180.0" text="Kim Dong">
+               <font>
+                  <Font name="Bodoni MT Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="bookAuthor_year" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="44.0" text="1970">
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="30.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../file_images/pngtree-5-stars-3d-icon-png-image_6138434.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+   <effect>
+      <DropShadow height="10.0" radius="4.5" spread="0.05" width="10.0" />
+   </effect>
+</HBox>

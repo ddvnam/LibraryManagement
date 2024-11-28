@@ -64,7 +64,6 @@ public class Member extends Account{
         } else {
             System.out.println("Search Results:");
             for (Book book : results) {
-                book.getInformation();
                 System.out.println("-------------------------");
             }
         }
@@ -92,14 +91,14 @@ public class Member extends Account{
                 System.out.println("Book not available.");
                 return;
             }
-            System.out.println("numOFcopies before checkout: " + bookItem.getNumOfCopies());
+            System.out.println("numOFcopies before checkout: " + bookItem.getCopies());
             if (bookItem.checkout()) {
                 borrowedBooks.add(bookItem);
 
                 //totalBooksCheckedout++;
 
                 System.out.println("Book checked out successfully.");
-                System.out.println("numOFcopies after checkout: " + bookItem.getNumOfCopies());
+                System.out.println("numOFcopies after checkout: " + bookItem.getCopies());
 
                 //Gửi email lên portal
                 PortalNotification portal = new PortalNotification(1, new Date(), "BẠN ĐÃ MƯỢN SÁCH THÀNH CÔNG: " + bookItem.getTitle());
@@ -143,24 +142,14 @@ public class Member extends Account{
 
                 // Update the catalog to reflect the return
                 BookItem catalogItem = catalog.getBookItem(bookItem);
-                System.out.println("numOFcopies before return: " + catalogItem.getNumOfCopies());
+                System.out.println("numOFcopies before return: " + catalogItem.getCopies());
                 if (catalogItem != null) {
                     catalogItem.checkin(); // increase number of copies and change status
                     System.out.println("Book returned successfully.");
-                    System.out.println("numOFcopies after return: " + catalogItem.getNumOfCopies());
+                    System.out.println("numOFcopies after return: " + catalogItem.getCopies());
 
                     //totalBookCheckout--;
-
-                    //Gửi email về portal
-                    PortalNotification portal = new PortalNotification(1, new Date(), "BẠN ĐÃ TRẢ SÁCH THÀNH CÔNG: " + bookItem.getTitle());
-                    this.addPortalNT(portal);
-
-                    // Gửi email thông báo trả sách
-                    if(!Objects.equals(this.getEmail(), "")) {
-                        String content = "Bạn đã trả sách thành công: " + bookItem.getTitle();
-                        String subject = "THÔNG BÁO TRẢ SÁCH";
-                        this.sendEmailNotificationMember(content, subject);  // Gửi email tới tài khoản của Member
-                    }
+                    sendEmailNotificationMember("Bạn đã trả sách thành công: " + bookItem.getTitle(), bookItem);
                     return;
                 } else {
                     System.out.println("Error: Could not find the book in the catalog.");
@@ -171,4 +160,15 @@ public class Member extends Account{
         }
     }
 
+    private void sendEmailNotificationMember(String content, BookItem bookItem) {
+        //Gửi email về portal
+        PortalNotification portal = new PortalNotification(1, new Date(), "BẠN ĐÃ TRẢ SÁCH THÀNH CÔNG: " + bookItem.getTitle());
+        this.addPortalNT(portal);
+
+        // Gửi email thông báo trả sách
+        if(!Objects.equals(this.getEmail(), "")) {
+            String subject = "THÔNG BÁO TRẢ SÁCH";
+            this.sendEmailNotificationMember(content, subject);  // Gửi email tới tài khoản của Member
+        }
+    }
 }

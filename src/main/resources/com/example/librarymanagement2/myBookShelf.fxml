@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement2.HelloController">
+    <children>
+        <MenuBar>
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <SplitPane dividerPositions="0.17542297417631342" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
+            <items>
+                <VBox fx:id="left" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="698.0" prefWidth="180.0">
+                    <HBox alignment="CENTER" style="-fx-padding: 0 0 0 5;">
+                        <children>
+                            <ImageView fitHeight="29.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../images/logo_1.png" />
+                                </image>
+                            </ImageView>
+                            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="61.0" prefWidth="98.0" styleClass="MNPT" text="MNPT" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                <font>
+                                    <Font name="Comic Sans MS Bold" size="20.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </HBox>
+                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="166.0" styleClass="menu-title" text="MENU" textFill="WHITE" VBox.vgrow="SOMETIMES">
+                        <font>
+                            <Font name="System Bold" size="20.0" />
+                        </font>
+                    </Label>
+                    <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="ALWAYS">
+                        <children>
+                            <HBox fx:id="menu_home" alignment="CENTER" onMouseClicked="#home" prefHeight="50.0" prefWidth="134.0" stylesheets="@Styles.css">
+                                <children>
+                                    <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../../../images/icons8-home-48.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Button fx:id="home_btn" maxWidth="1.7976931348623157E308" onMouseClicked="#home" prefHeight="46.0" prefWidth="100.0" styleClass="menu-btn" text="Home">
+                                        <font>
+                                            <Font size="15.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                                <styleClass>
+                                    <String fx:value="menu_choice" />
+                                    <String fx:value="menu" />
+                                </styleClass>
+                            </HBox>
+                            <HBox fx:id="menu_mybooks" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="134.0" stylesheets="@Styles.css">
+                                <children>
+                                    <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../../../images/icons8-book-50.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Button fx:id="mybooks_btn" maxWidth="1.7976931348623157E308" onMouseClicked="#myBookShelf" prefHeight="45.0" prefWidth="100.0" styleClass="menu-btn" text="My books">
+                                        <font>
+                                            <Font size="15.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                                <styleClass>
+                                    <String fx:value="menu_choice" />
+                                    <String fx:value="menu" />
+                           <String fx:value="menu_choice_selected" />
+                                </styleClass>
+                            </HBox>
+                            <HBox fx:id="menu_categories" alignment="CENTER" layoutX="10.0" layoutY="50.0" prefHeight="50.0" prefWidth="134.0" stylesheets="@Styles.css">
+                                <children>
+                                    <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../../../images/icons8-category-32.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Button fx:id="categories_btn" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="100.0" styleClass="menu-btn" text="Categories">
+                                        <font>
+                                            <Font size="15.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                                <styleClass>
+                                    <String fx:value="menu_choice" />
+                                    <String fx:value="menu" />
+                                </styleClass>
+                            </HBox>
+                            <HBox fx:id="menu_author" alignment="CENTER" layoutX="10.0" layoutY="90.0" onMouseClicked="#author" prefHeight="50.0" prefWidth="134.0" stylesheets="@Styles.css">
+                                <children>
+                                    <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../../../images/icons8-author-32.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Button fx:id="author_btn" maxWidth="1.7976931348623157E308" onMouseClicked="#author" prefHeight="45.0" prefWidth="100.0" styleClass="menu-btn" text="Author">
+                                        <font>
+                                            <Font size="15.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                                <styleClass>
+                                    <String fx:value="menu_choice" />
+                                    <String fx:value="menu" />
+                                </styleClass>
+                            </HBox>
+                            <HBox fx:id="menu_setting" alignment="CENTER" layoutX="10.0" layoutY="130.0" prefHeight="50.0" prefWidth="134.0" stylesheets="@Styles.css">
+                                <children>
+                                    <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../../../images/icons8-setting-50.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Button fx:id="setting_btn" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="86.0" styleClass="menu-btn" text="Setting">
+                                        <font>
+                                            <Font size="15.0" />
+                                        </font>
+                                    </Button>
+                                </children>
+                                <styleClass>
+                                    <String fx:value="menu_choice" />
+                                    <String fx:value="menu" />
+                                </styleClass>
+                            </HBox>
+                            <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="250.0" prefWidth="250.0" VBox.vgrow="ALWAYS">
+                                <children>
+                                    <ImageView fitHeight="116.0" fitWidth="125.0" layoutX="14.0" layoutY="192.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../../../images/tree-logo-imgae.png" />
+                                        </image>
+                                    </ImageView>
+                                </children></Pane>
+                            <HBox alignment="CENTER" layoutX="10.0" layoutY="170.0" stylesheets="@Styles.css">
+                                <children>
+                                    <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../../../images/icons8-logout-48.png" />
+                                        </image>
+                                    </ImageView>
+                                    <Button maxWidth="1.7976931348623157E308" onAction="#showDialog" prefHeight="45.0" prefWidth="100.0" styleClass="menu_choice" stylesheets="@Styles.css" text="Logout">
+                                        <font>
+                                            <Font size="15.0" />
+                                        </font>
+                                        <HBox.margin>
+                                            <Insets />
+                                        </HBox.margin>
+                                    </Button>
+                                </children>
+                                <styleClass>
+                                    <String fx:value="menu_choice" />
+                                    <String fx:value="menu" />
+                                </styleClass>
+                            </HBox>
+                        </children>
+                        <padding>
+                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </padding>
+                    </VBox>
+                </VBox>
+                  <VBox fx:id="UIshowListShelf" maxHeight="1.7976931348623157E308" prefHeight="900.0" prefWidth="738.0">
+                      <children>
+                          <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0">
+                              <content>
+                                  <VBox fx:id="shelf" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="900.0" prefWidth="750.0">
+                                      <children>
+                                          <HBox fx:id="author_top" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="725.0" spacing="10">
+                                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@../../../images/bookcrossing.png" />
+                                                  </image>
+                                    <HBox.margin>
+                                       <Insets left="30.0" />
+                                    </HBox.margin>
+                                              </ImageView>
+                                              <TextField fx:id="searchOnShelf" maxHeight="35.0" onAction="#onSearchOnBooksShelf" prefHeight="27.0" prefWidth="264.0" promptText="Find your borrowed book">
+                                                  <font>
+                                                      <Font size="13.0" />
+                                                  </font>
+                                              </TextField>
+                                              <ImageView fitHeight="30.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@../../../images/search-interface-symbol.png" />
+                                                  </image>
+                                                  <cursor>
+                                                      <Cursor fx:constant="DEFAULT" />
+                                                  </cursor>
+                                              </ImageView>
+                                              <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                                              <VBox.margin>
+                                                  <Insets top="5.0" />
+                                              </VBox.margin>
+                                          </HBox>
+                              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <ScrollPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                                       <content>
+                                          <VBox fx:id="ListBookBorrow" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="1085.0">
+                                             <padding>
+                                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                             </padding>
+                                          </VBox>
+                                       </content>
+                                    </ScrollPane>
+                                    <VBox fx:id="BookBorrowDetails" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="655.0" prefWidth="250.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                                      </children>
+                                  </VBox>
+                              </content>
+                          </ScrollPane>
+                      </children>
+                  </VBox>
+            </items>
+        </SplitPane>
+        <BorderPane fx:id="root" maxHeight="1.7976931348623157E308" prefHeight="0.0" prefWidth="900.0">
+            <bottom>
+                <VBox fx:id="bot" maxHeight="-Infinity" maxWidth="-Infinity" BorderPane.alignment="CENTER" />
+            </bottom>
+        </BorderPane>
+    </children>
+</VBox>
