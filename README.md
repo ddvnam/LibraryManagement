@@ -40,9 +40,17 @@ The Library Management System is a Java-based application designed to manage lib
 3. **MySQL** - Database setup.
 4. **XAMPP** - Local server for MySQL.
 
-### Steps:
-1. **Clone the repository**:
+### Setup Steps
+1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/library-management-system.git
-   cd library-management-system
+   git clone <repository_url>
+   cd <project_directory>
+2. Cài đặt các thư viện cần thiết từ file requirements.txt:
+   ```bash
+   pip instal -r requirements.txt
+3. Chạy file main.py:
+   ```bash
+   python main.py
+4. Truy cập giao diện web và bắt đầu đặt câu hỏi về Thông tin về Trường Đại học Công Nghệ.
+
 
