@@ -21,12 +21,12 @@
 ---
 
 ## **Technologies Used**
--**Java**: Ngôn ngữ lập trình chính.
--** JavaFX**: Được sử dụng để xây dựng giao diện người dùng đồ họa.
-- ** JUnit**: Kiểm tra đơn vị cho ứng dụng.
--**MySQL**: Cơ sở dữ liệu được sử dụng cho dữ liệu kho lưu trữ.
-Maven**: Xây dựng tự động hóa và quản lý phụ thuộc.
-XAMPP** hoặc MySQL: Máy chủ cục bộ cho cơ sở dữ liệu MySQL.
+- **Java**: Ngôn ngữ lập trình chính.
+- **JavaFX**: Được sử dụng để xây dựng giao diện người dùng đồ họa.
+- **JUnit**: Kiểm tra đơn vị cho ứng dụng.
+- **MySQL**: Cơ sở dữ liệu được sử dụng cho dữ liệu kho lưu trữ.
+- **Maven**: Xây dựng tự động hóa và quản lý phụ thuộc.
+- **XAMPP** hoặc MySQL: Máy chủ cục bộ cho cơ sở dữ liệu MySQL.
 
 ---
 
@@ -35,10 +35,14 @@ XAMPP** hoặc MySQL: Máy chủ cục bộ cho cơ sở dữ liệu MySQL.
 
 ## **Setup and Installation**
 ### Prerequisites:
-1.Java Development Kit (JDK) ** - Phiên bản 11 hoặc cao hơn.
-2.Maven – Quản lý các dependencies và build project.
-3.**MySQL** - Cài đặt cơ sở dữ liệu.
-4.XAMPP hoặc WorkBench** - MySQL Sever từ phiên bản 9.0.
+1. **Java Development Kit (JDK)**: Phiên bản 11 hoặc cao hơn.
+
+2. **Maven**: Quản lý các dependencies và build project.
+
+3. **MySQL**: Cài đặt cơ sở dữ liệu.
+
+4. **XAMPP** hoặc **MySQL Workbench**: Máy chủ MySQL từ phiên bản 9.0.
+
 
 ### Setup Steps
 1. Clone the repository:
