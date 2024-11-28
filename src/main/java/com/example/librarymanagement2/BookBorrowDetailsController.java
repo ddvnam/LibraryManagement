@@ -44,7 +44,7 @@ public class BookBorrowDetailsController {
         author.setText(bookItem.getAuthor());
         isbn.setText("ISBN: " + bookItem.getISBN());
         price.setText("Price: " + bookItem.getPrice());
-        borrowdate.setText("Borrowed Date: " + bookItem.getPublicationDate());
+        borrowdate.setText("Publication Date: " + bookItem.getPublicationDate());
         description.setText("Description: " + bookItem.getDescription());
     }
 }

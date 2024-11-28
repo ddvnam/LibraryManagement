@@ -247,7 +247,7 @@
                                           <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="58.0" prefWidth="125.0" styleClass="stat-box" HBox.hgrow="ALWAYS">
                                              <children>
                                                 <Label maxHeight="1.7976931348623157E308" styleClass="stat-number" text="26,955" VBox.vgrow="ALWAYS" />
-                                                <Label maxHeight="1.7976931348623157E308" styleClass="stat-title" text="My Shelves" VBox.vgrow="ALWAYS" />
+                                                <Label maxHeight="1.7976931348623157E308" styleClass="stat-title" text="Book Readers" VBox.vgrow="ALWAYS" />
                                              </children>
                                           </VBox>
                                           <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="58.0" prefWidth="59.0" styleClass="library-overall-figure" text="+1082" HBox.hgrow="SOMETIMES">
