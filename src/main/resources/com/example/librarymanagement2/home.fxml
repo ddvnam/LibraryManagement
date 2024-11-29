@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement2.HelloController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.17542297417631342" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
+        <items>
+              <VBox fx:id="left" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="698.0" prefWidth="180.0">
+               <HBox alignment="CENTER" style="-fx-padding: 0 0 0 5;">
+                  <children>
+                     <ImageView fitHeight="29.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../../../images/logo_1.png" />
+                        </image>
+                     </ImageView>
+                     <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="61.0" prefWidth="98.0" styleClass="MNPT" text="MNPT" textFill="WHITE" HBox.hgrow="ALWAYS">
+                        <font>
+                           <Font name="Comic Sans MS Bold" size="20.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+                  <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="166.0" styleClass="menu-title" text="MENU" textFill="WHITE" VBox.vgrow="SOMETIMES">
+                  <font>
+                     <Font name="System Bold" size="20.0" />
+                  </font>
+               </Label>
+               <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0" VBox.vgrow="ALWAYS">
+                  <children>
+                     <HBox fx:id="menu_home" alignment="CENTER" onMouseClicked="#home" stylesheets="@Styles.css">
+                        <children>
+                           <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../../../../../../../../JAVA/testjavafx/src/main/resources/com/example/testjavafx/icons8-home-48.png" />
+                              </image>
+                           </ImageView>
+                              <Button fx:id="home_btn" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="100.0" styleClass="menu-btn" stylesheets="@Styles.css" text="Home">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Button>
+                        </children>
+                        <styleClass>
+                           <String fx:value="menu" />
+                           <String fx:value="menu_choice" />
+                           <String fx:value="menu_choice_selected" />
+                        </styleClass>
+                     </HBox>
+                     <HBox fx:id="menu_mybooks" alignment="CENTER" layoutX="10.0" layoutY="10.0" onMouseClicked="#myBookShelf" stylesheets="@Styles.css">
+                        <children>
+                           <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../../../../../../../../JAVA/testjavafx/src/main/resources/com/example/testjavafx/icons8-book-50.png" />
+                              </image>
+                           </ImageView>
+                           <Button fx:id="mybooks_btn" maxWidth="1.7976931348623157E308" onMouseClicked="#myBookShelf" prefHeight="45.0" prefWidth="100.0" styleClass="menu-btn" stylesheets="@Styles.css" text="My books">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Button>
+                        </children>
+                        <styleClass>
+                           <String fx:value="menu" />
+                           <String fx:value="menu_choice" />
+                        </styleClass>
+                     </HBox>
+                     <HBox fx:id="menu_categories" alignment="CENTER" layoutX="10.0" layoutY="50.0" stylesheets="@Styles.css">
+                        <children>
+                           <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../../../../../../../../JAVA/testjavafx/src/main/resources/com/example/testjavafx/icons8-category-32.png" />
+                              </image>
+                           </ImageView>
+                           <Button fx:id="categories_btn" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="100.0" styleClass="menu-btn" stylesheets="@Styles.css" text="Categories">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Button>
+                        </children>
+                        <styleClass>
+                           <String fx:value="menu" />
+                           <String fx:value="menu_choice" />
+                        </styleClass>
+                     </HBox>
+                     <HBox fx:id="menu_author" alignment="CENTER" layoutX="10.0" layoutY="90.0" onMouseClicked="#author" stylesheets="@Styles.css">
+                        <children>
+                           <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../../../../../../../../JAVA/testjavafx/src/main/resources/com/example/testjavafx/icons8-author-32.png" />
+                              </image>
+                           </ImageView>
+                           <Button fx:id="author_btn" maxWidth="1.7976931348623157E308" onMouseClicked="#author" prefHeight="45.0" prefWidth="100.0" styleClass="menu-btn" stylesheets="@Styles.css" text="Author">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Button>
+                        </children>
+                        <styleClass>
+                           <String fx:value="menu" />
+                           <String fx:value="menu_choice" />
+                        </styleClass>
+                     </HBox>
+                     <HBox fx:id="menu_setting" alignment="CENTER" layoutX="10.0" layoutY="130.0" stylesheets="@Styles.css">
+                        <children>
+                           <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../../../../../../../../JAVA/testjavafx/src/main/resources/com/example/testjavafx/icons8-setting-50.png" />
+                              </image>
+                           </ImageView>
+                           <Button fx:id="setting_btn" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="100.0" styleClass="menu-btn" stylesheets="@Styles.css" text="Setting">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Button>
+                        </children>
+                        <styleClass>
+                           <String fx:value="menu" />
+                           <String fx:value="menu_choice" />
+                        </styleClass>
+                     </HBox>
+                     <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="250.0" prefWidth="250.0" VBox.vgrow="ALWAYS">
+                        <children>
+                           <ImageView fitHeight="116.0" fitWidth="125.0" layoutX="21.0" layoutY="192.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../../images/tree-logo-imgae.png" />
+                              </image>
+                           </ImageView>
+                        </children></Pane>
+                     <HBox alignment="CENTER" layoutX="10.0" layoutY="170.0" styleClass="menu_choice" stylesheets="@Styles.css">
+                        <children>
+                           <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../../../images/icons8-logout-48.png" />
+                              </image>
+                           </ImageView>
+                           <Button fx:id="logoutButton" maxWidth="1.7976931348623157E308" onMouseClicked="#handleLogout" prefHeight="45.0" prefWidth="100.0" styleClass="menu-btn" stylesheets="@Styles.css" text="Logout">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                              <HBox.margin>
+                                 <Insets />
+                              </HBox.margin>
+                           </Button>
+                        </children>
+                     </HBox>
+                  </children>
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+               </VBox>
+              </VBox>
+            <StackPane>
+               <children>
+                  <VBox fx:id="UIshowListBook" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="704.0" prefWidth="750.0">
+                     <children>
+                        <HBox maxHeight="-Infinity" style="-fx-padding: 10 5 0 20;" VBox.vgrow="ALWAYS">
+                           <children>
+                                <HBox fx:id="top" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="819.0" spacing="10" HBox.hgrow="ALWAYS">
+                                    <Label styleClass="dashboard-label" text="Dashboard" />
+                                 <ImageView fitHeight="30.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../../../images/search-interface-symbol.png" />
+                                    </image>
+                                    <cursor>
+                                       <Cursor fx:constant="DEFAULT" />
+                                    </cursor>
+                                 </ImageView>
+                                    <TextField fx:id="searchField" maxHeight="35.0" onAction="#onSearch" prefHeight="27.0" prefWidth="264.0" promptText="Search anything book here">
+                                    <font>
+                                       <Font size="13.0" />
+                                    </font>
+                                 </TextField>
+                                 <ImageView fitHeight="34.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                       <Image url="@../../../images/bookshelf.png" />
+                                    </image>
+                                 </ImageView>
+                                 <effect>
+                                    <DropShadow height="10.0" radius="4.5" width="10.0" />
+                                 </effect>
+                                </HBox>
+                           </children>
+                        </HBox>
+                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="649.0" prefWidth="750.0" VBox.vgrow="ALWAYS">
+                           <children>
+                                <VBox fx:id="center" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDetected="#onSearch" prefHeight="647.0" prefWidth="574.0" spacing="20" style="-fx-padding: 20;" HBox.hgrow="SOMETIMES">
+                                    <!-- Statistics Row -->
+                                    <HBox alignment="CENTER" prefHeight="58.0" prefWidth="556.0" spacing="20" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;">
+                                    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" styleClass="library-overall" HBox.hgrow="ALWAYS">
+                                       <children>
+                                              <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#author" prefHeight="58.0" prefWidth="125.0" styleClass="stat-box" HBox.hgrow="ALWAYS">
+                                                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="110.0" styleClass="stat-number" text="28,886" VBox.vgrow="ALWAYS" />
+                                                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="115.0" styleClass="stat-title" text="Book Authors" VBox.vgrow="ALWAYS" />
+                                              </VBox>
+                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="58.0" prefWidth="59.0" styleClass="library-overall-figure" text="+1280" HBox.hgrow="SOMETIMES">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                                    <HBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" styleClass="library-overall" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="58.0" prefWidth="125.0" styleClass="stat-box" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label maxHeight="1.7976931348623157E308" styleClass="stat-number" text="26,955" VBox.vgrow="ALWAYS" />
+                                                <Label maxHeight="1.7976931348623157E308" styleClass="stat-title" text="Book Readers" VBox.vgrow="ALWAYS" />
+                                             </children>
+                                          </VBox>
+                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="58.0" prefWidth="59.0" styleClass="library-overall-figure" text="+1082" HBox.hgrow="SOMETIMES">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                                    <HBox layoutX="153.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" styleClass="library-overall" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="58.0" prefWidth="125.0" styleClass="stat-box" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label maxHeight="1.7976931348623157E308" styleClass="stat-number" text="20,622" VBox.vgrow="ALWAYS" />
+                                                <Label maxHeight="1.7976931348623157E308" styleClass="stat-title" text="Book Sharer" VBox.vgrow="ALWAYS" />
+                                             </children>
+                                          </VBox>
+                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="58.0" prefWidth="60.0" styleClass="library-overall-figure" text="+1468" HBox.hgrow="SOMETIMES">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="60.0" prefWidth="200.0" styleClass="library-overall">
+                                       <children>
+                                          <VBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="58.0" prefWidth="125.0" styleClass="stat-box" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label maxHeight="1.7976931348623157E308" styleClass="stat-number" text="20,622" VBox.vgrow="ALWAYS" />
+                                                <Label maxHeight="1.7976931348623157E308" styleClass="stat-title" text="Book Sharer" VBox.vgrow="ALWAYS" />
+                                             </children>
+                                          </VBox>
+                                          <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="58.0" prefWidth="60.0" styleClass="library-overall-figure" text="+1468" HBox.hgrow="SOMETIMES">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </HBox>
+                                    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                                    <opaqueInsets>
+                                       <Insets />
+                                    </opaqueInsets>
+                                    <effect>
+                                       <DropShadow blurType="GAUSSIAN" height="10.0" radius="4.5" width="10.0" />
+                                    </effect>
+                                    </HBox>
+                                 <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+                                    <content>
+                                       <GridPane fx:id="gridPane" alignment="CENTER" hgap="55.0" style="-fx-background-color: white; -fx-background-radius: 10;" vgap="50.0">
+                                         <columnConstraints>
+                                           <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                                           <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                                             <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                                             <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                                         </columnConstraints>
+                                         <rowConstraints>
+                                           <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
+                                           <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
+                                         </rowConstraints>
+                                          <effect>
+                                             <DropShadow height="10.0" radius="4.5" width="10.0" />
+                                          </effect>
+                                          <padding>
+                                             <Insets bottom="10.0" left="32.0" right="32.0" top="10.0" />
+                                          </padding>
+                                       </GridPane>
+                                    </content>
+                                 </ScrollPane>
+                                </VBox>
+                                <VBox fx:id="right" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="647.0" prefWidth="180.0" spacing="20" style="-fx-padding: 2 5 2 2;" styleClass="sidebar" HBox.hgrow="ALWAYS">
+                                 <StackPane alignment="TOP_CENTER" style="-fx-padding: 15 0 0 0;">
+                                    <children>
+                                       <VBox fx:id="rightDetails" prefHeight="643.0" prefWidth="173.0" spacing="10.0">
+                                          <children>
+                                                <!-- Blog Subscription -->
+                                                <VBox alignment="CENTER" prefHeight="90.0" prefWidth="140.0" spacing="8.0" styleClass="subscribe-box">
+                                                   <Button onAction="#showNotification" text="🔔" />
+                                                    <Label prefHeight="30.0" prefWidth="117.0" styleClass="Subscribe-box-text" text="Subscribe to Our Blog" />
+                                                    <Button onAction="#showDialog" prefWidth="68.0" text="Subscribe" />
+                                                <padding>
+                                                   <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+                                                </padding>
+                                                <effect>
+                                                   <DropShadow height="10.0" radius="4.5" width="10.0" />
+                                                </effect>
+                                                </VBox>
+                                             <VBox fx:id="rightBookAuthor">
+                                                <children>
+                                                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" styleClass="right-table-title">
+                                                      <children>
+                                                             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="rightTextColor" text="Famous Authors">
+                                                            <font>
+                                                               <Font name="System Bold" size="13.0" />
+                                                            </font>
+                                                         </Label>
+                                                      </children>
+                                                   </HBox>
+                                          
+                                                                                                                                 <!-- Book Authors -->
+                                                      <VBox style="-fx-padding: 0 0 0 10;">
+                                                           <Label prefHeight="25.0" prefWidth="140.0" text="Reinaldo Costa" />
+                                                           <Label prefHeight="25.0" prefWidth="140.0" text="Ahmad Gurona" />
+                                                      </VBox>
+                                                </children>
+                                                <effect>
+                                                   <DropShadow blurType="GAUSSIAN" height="10.0" radius="4.5" width="10.0" />
+                                                </effect>
+                                             </VBox>
+                                             <VBox fx:id="rightBooks">
+                                                <children>
+                                                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" styleClass="right-table-title">
+                                                      <children>
+                                                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="rightTextColor" text="Trending Books" textAlignment="CENTER">
+                                                            <font>
+                                                               <Font name="System Bold" size="13.0" />
+                                                            </font>
+                                                         </Label>
+                                                      </children>
+                                                   </HBox>
+                                                   <VBox prefHeight="342.0" prefWidth="140.0" style="-fx-padding: 0 0 0 10;">
+                                                      <children>
+                                                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sách Thư viện DEmo" VBox.vgrow="ALWAYS">
+                                                            <font>
+                                                               <Font name="System Italic" size="14.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sách Thư viện DEmo" VBox.vgrow="ALWAYS">
+                                                            <font>
+                                                               <Font name="System Italic" size="14.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sách Thư viện DEmo" VBox.vgrow="ALWAYS">
+                                                            <font>
+                                                               <Font name="System Italic" size="14.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sách Thư viện DEmo" VBox.vgrow="ALWAYS">
+                                                            <font>
+                                                               <Font name="System Italic" size="14.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sách Thư viện DEmo" VBox.vgrow="ALWAYS">
+                                                            <font>
+                                                               <Font name="System Italic" size="14.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sách Thư viện DEmo" VBox.vgrow="ALWAYS">
+                                                            <font>
+                                                               <Font name="System Italic" size="14.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sách Thư viện DEmo" VBox.vgrow="ALWAYS">
+                                                            <font>
+                                                               <Font name="System Italic" size="14.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sách Thư viện DEmo" VBox.vgrow="ALWAYS">
+                                                            <font>
+                                                               <Font name="System Italic" size="14.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sách Thư viện DEmo" VBox.vgrow="ALWAYS">
+                                                            <font>
+                                                               <Font name="System Italic" size="14.0" />
+                                                            </font>
+                                                         </Label>
+                                                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sách Thư viện DEmo" VBox.vgrow="ALWAYS">
+                                                            <font>
+                                                               <Font name="System Italic" size="14.0" />
+                                                            </font>
+                                                         </Label>
+                                                      </children>
+                                                   </VBox>
+                                                </children>
+                                                <effect>
+                                                   <DropShadow blurType="GAUSSIAN" height="10.0" radius="4.5" width="10.0" />
+                                                </effect>
+                                             </VBox>
+                                          </children>
+                                       </VBox>
+                                       <VBox fx:id="notificationBox" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="257.0" prefWidth="168.0" visible="false">
+                                          <children>
+                                             <HBox style="-fx-background-color: #20344c; -fx-background-radius: 10 10 0 0;">
+                                                <children>
+                                                   <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="168.0" text="Bảng thông báo" textFill="WHITE">
+                                                      <padding>
+                                                         <Insets left="5.0" />
+                                                      </padding>
+                                                   </Label>
+                                                   <Button fx:id="buttonX" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#hideNotification" prefHeight="26.0" prefWidth="38.0" text="X" textAlignment="CENTER" />
+                                                </children>
+                                             </HBox>
+                                             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="NotifiDetails" text="Thông báo 1" VBox.vgrow="ALWAYS">
+                                                <padding>
+                                                   <Insets left="5.0" />
+                                                </padding>
+                                                <VBox.margin>
+                                                   <Insets />
+                                                </VBox.margin>
+                                             </Label>
+                                             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="NotifiDetails" text="Thông báo 2" VBox.vgrow="ALWAYS">
+                                                <padding>
+                                                   <Insets left="5.0" />
+                                                </padding>
+                                                <VBox.margin>
+                                                   <Insets />
+                                                </VBox.margin>
+                                             </Label>
+                                             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="NotifiDetails" text="Thông báo 3" VBox.vgrow="ALWAYS">
+                                                <padding>
+                                                   <Insets left="5.0" />
+                                                </padding>
+                                                <VBox.margin>
+                                                   <Insets />
+                                                </VBox.margin>
+                                             </Label>
+                                             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="NotifiDetails" text="Thông báo 4" VBox.vgrow="ALWAYS">
+                                                <padding>
+                                                   <Insets left="5.0" />
+                                                </padding>
+                                                <VBox.margin>
+                                                   <Insets />
+                                                </VBox.margin>
+                                             </Label>
+                                             <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="NotifiDetails" text="Thông báo 5" VBox.vgrow="ALWAYS">
+                                                <padding>
+                                                   <Insets left="5.0" />
+                                                </padding>
+                                                <VBox.margin>
+                                                   <Insets />
+                                                </VBox.margin>
+                                             </Label>
+                                          </children>
+                                       </VBox>
+                                    </children>
+                                 </StackPane>
+                                </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="UIshowBook" prefHeight="200.0" prefWidth="100.0" visible="false" />
+               </children>
+            </StackPane>
+        </items>
+      </SplitPane>
+   </children>
+</VBox>

@@ -1,0 +1,18 @@
+.title {
+    -fx-font-size: 25;
+    -fx-font-weight: bold;
+    -fx-fill: #ffffff;
+}
+
+.button {
+    -fx-background-color:  #11121b;
+    -fx-background-radius: 20;
+}
+
+.button:hover {
+    -fx-border-color: #ffffff;
+}
+
+.button:focus {
+    -fx-border-color: #ffffff;
+}

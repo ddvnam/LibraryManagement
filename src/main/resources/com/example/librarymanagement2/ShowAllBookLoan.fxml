@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.librarymanagement2.ShowAllBookLoanController">
+   <children>
+      <Label layoutX="6.0" layoutY="14.0" prefHeight="53.0" prefWidth="334.0" text="Show All Book Loan">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <TableView fx:id="table" layoutY="111.0" maxHeight="488.0" maxWidth="579.0" minHeight="488.0" minWidth="542.0" prefHeight="488.0" prefWidth="550.0">
+         <columns>
+            <TableColumn fx:id="account_id" prefWidth="101.0" text="AccountID" />
+            <TableColumn fx:id="book_id" prefWidth="123.0" text="BookID" />
+            <TableColumn fx:id="issueDate" prefWidth="187.0" text="IssueDate" />
+            <TableColumn fx:id="dueDate" prefWidth="138.0" text="DueDate" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
