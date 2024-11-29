@@ -63,6 +63,9 @@ public class HelloController {
     private VBox UIshowListAuthor;
 
     @FXML
+    private GridPane gridPane;
+
+    @FXML
     private void showNotification() {
         notificationBox.setVisible(true);
     }
@@ -78,9 +81,6 @@ public class HelloController {
     private BookRepository bookRepository;
     private final ExecutorService executorService = Executors.newFixedThreadPool(8);
     private final String[] colors = {"#B9E5FF", "#ADDCC8", "#F88F3C", "#BDB2FE", "#90de99", "#FB9AA8","#F6DB68", "#FF5056", "#F9CDAD"};
-
-    @FXML
-    private GridPane gridPane;
 
     @FXML
     private void showDialog() {
@@ -171,19 +171,6 @@ public class HelloController {
         gridPane.add(loadMoreButton, 0, currentRow++);
     }
 
-    private void updateSearchBookResults(List<BookItem> searchResults) {
-        List<BookItem> limitedResults = searchResults.size() > 20
-                ? searchResults.subList(0, 20)
-                : searchResults;
-        int currentIndex = 0;
-        while(currentIndex<limitedResults.size()) {
-            int index = currentIndex;
-            currentIndex++;
-            BookItem bookItem = limitedResults.get(index);
-            VBox cr;
-        }
-    }
-
     @FXML
     private void onSearchAuthor() {
         String searchQuery = searchFieldAuthor.getText().trim();
@@ -198,70 +185,12 @@ public class HelloController {
                 noResultsLabel.setStyle("-fx-font-size: 20px; -fx-text-fill: #0077ff; -fx-font-weight: bold");
                 VBox_addAuthor.getChildren().add(noResultsLabel);
             } else {
-                updateSearchAuthorResults(searchResults);
+                List<String> author_name = bookRepository.GetAuthorNameByString(searchQuery);
+                loadNextAuthor(0,author_name);
             }
         } else {
             updateBookAuthorSequentially();
         }
-    }
-
-    private void updateSearchAuthorResults(List<BookItem> searchResults) {
-        VBox_addAuthor.getChildren().clear();
-
-        ScrollPane scrollPane = new ScrollPane();
-        VBox resultContainer = new VBox(10); // Container cho kết quả
-        resultContainer.setAlignment(Pos.TOP_CENTER);
-        scrollPane.setContent(resultContainer);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        scrollPane.setFitToWidth(true);
-
-        VBox_addAuthor.getChildren().add(scrollPane);
-
-        // Giới hạn kết quả nếu cần thiết
-        List<BookItem> limitedResults = searchResults.size() > 20
-                ? searchResults.subList(0, 20)
-                : searchResults;
-
-        int[] currentIndex = {0};
-
-        // Task để tải từng kết quả
-        Task<Void> loadTask = new Task<>() {
-            @Override
-            protected Void call() {
-                while (currentIndex[0] < limitedResults.size()) {
-                    int index = currentIndex[0];
-                    currentIndex[0]++;
-
-                    Platform.runLater(() -> {
-                        BookItem bookItem = limitedResults.get(index);
-
-                        // Tạo VBox đại diện cho mỗi kết quả
-                        VBox bookBox = createBookBox(bookItem,HelloController.this::back2,UIshowListAuthor,UIshowAuthor);
-
-                        // Thêm vào resultContainer
-                        resultContainer.getChildren().add(bookBox);
-                    });
-
-                    try {
-                        Thread.sleep(150); // Nghỉ để tránh lag
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                    }
-                }
-                return null;
-            }
-        };
-        Button loadMoreButton = new Button("Load More");
-        loadMoreButton.setOnAction(event -> {
-            int nextIndex = currentIndex[0];
-            List<BookItem> nextBatch = searchResults.subList(nextIndex, Math.max(nextIndex + ITEMS_PER_LOAD, searchResults.size()));
-            updateSearchResults(nextBatch);
-        });
-        Thread backgroundThread = new Thread(loadTask);
-        backgroundThread.setDaemon(true);
-        backgroundThread.start();
-//        gridPane.add(loadMoreButton, 0, currentRow++);
     }
 
     @FXML
@@ -294,7 +223,7 @@ public class HelloController {
                             BookBorrowDetails.getChildren().add(no_details_Label );
                         }
                     } catch (IOException e) {
-                            e.printStackTrace();
+                        e.printStackTrace();
                     }
                 }
             }
@@ -303,6 +232,62 @@ public class HelloController {
         }
 
     }
+
+//    private void updateSearchAuthorResults(List<BookItem> searchResults) {
+//        VBox_addAuthor.getChildren().clear();
+//
+//        ScrollPane scrollPane = new ScrollPane();
+//        VBox resultContainer = new VBox(10);
+//        resultContainer.setAlignment(Pos.TOP_CENTER);
+//        scrollPane.setContent(resultContainer);
+//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+//        scrollPane.setFitToWidth(true);
+//
+//        VBox_addAuthor.getChildren().add(scrollPane);
+//
+//        List<BookItem> limitedResults = searchResults.size() > 20
+//                ? searchResults.subList(0, 20)
+//                : searchResults;
+//
+//        int[] currentIndex = {0};
+//
+//        Task<Void> loadTask = new Task<>() {
+//            @Override
+//            protected Void call() {
+//                while (currentIndex[0] < limitedResults.size()) {
+//                    int index = currentIndex[0];
+//                    currentIndex[0]++;
+//
+//                    Platform.runLater(() -> {
+//                        BookItem bookItem = limitedResults.get(index);
+//                        VBox bookBox = createBookBox(bookItem,HelloController.this::back2,UIshowListAuthor,UIshowAuthor);
+//                        resultContainer.getChildren().add(bookBox);
+//                    });
+//                    try {
+//                        Thread.sleep(150);
+//                    } catch (InterruptedException e) {
+//                        Thread.currentThread().interrupt();
+//                    }
+//                }
+//                return null;
+//            }
+//        };
+//        Button loadMoreButton = new Button("Load More");
+//        loadMoreButton.setOnAction(event -> {
+//            int nextIndex = currentIndex[0];
+//            List<BookItem> nextBatch = searchResults.subList(nextIndex, Math.max(nextIndex + ITEMS_PER_LOAD, searchResults.size()));
+//            updateSearchResults(nextBatch);
+//        });
+//        Thread backgroundThread = new Thread(loadTask);
+//        backgroundThread.setDaemon(true);
+//        backgroundThread.start();
+//    }
+//
+//    private void updateSearchAuthorResultsFixed(List<String> author_name) {
+//        VBox_addAuthor.getChildren().clear();
+//        loadNextAuthor(0,author_name);
+//    }
 
     public void initialize() {
         bookRepository = new BookRepository();
@@ -327,7 +312,6 @@ public class HelloController {
         int totalBooks = allBooks.size();
         int[] currentIndex = {0};
 
-        // Task để tải dữ liệu dần dần
         Task<Void> loadTask = new Task<>() {
             @Override
             protected Void call() {
@@ -335,11 +319,9 @@ public class HelloController {
                     int start = currentIndex[0];
                     int end = Math.min(start + ITEMS_PER_LOAD, totalBooks);
 
-                    // Lấy nhóm sách hiện tại
                     List<BookItem> bookChunk = allBooks.subList(start, end);
                     currentIndex[0] = end;
 
-                    // Cập nhật giao diện
                     Platform.runLater(() -> updateGrid(bookChunk));
 
                     try {

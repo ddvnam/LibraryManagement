@@ -92,6 +92,41 @@ public class BookRepository {
         return Author;
     }
 
+    //new 11/29 1:27AM
+    public List<String> GetAuthorNameByString(String string) {
+        List<String> Author = new ArrayList<>();
+        Database db = new Database();
+        db.connectToDatabase();
+        Connection connection = db.getConnection();
+        if (connection != null) {
+            String query = "SELECT author, COUNT(book.book_id) AS book_count\n" +
+                    "FROM book\n" +
+                    "WHERE author LIKE '%" +string+"%'\n" +
+                    "GROUP BY author\n" +
+                    "ORDER BY book_count DESC;\n";
+            try {
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+
+                while (resultSet.next()) {
+                    String Author_name = resultSet.getString("author");
+                    Author.add(Author_name);
+                }
+                resultSet.close();
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return Author;
+    }
+
     public List<BookItem> getBooks_byAuthor(String Author) {
         List<BookItem> bookItems = new ArrayList<>();
         Database db = new Database();
@@ -106,7 +141,6 @@ public class BookRepository {
                     "    FROM book\n" +
                     "    GROUP BY author\n" +
                     "    ORDER BY book_count DESC\n" +
-                    "    LIMIT 5\n" +
                     ")\n" +
                     "SELECT\n" +
                     "    b.*,\n" +
@@ -204,7 +238,6 @@ public class BookRepository {
                     "join book_loan on book_item.book_item_id = book_loan.book_item_id\n" +
                     "join account on book_loan.account_id = account.account_id\n" +
                     "where account.account_id = 1;";
-            System.out.println("accound_id: "+account_id);
             try {
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);

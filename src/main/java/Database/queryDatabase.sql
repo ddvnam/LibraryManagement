@@ -42,4 +42,10 @@ insert into account(username, password, role)
 values ('member1','123','member'),
        ()
 
-insert into account_info(account_id, email)
+insert into account_info(account_id, email);
+
+SELECT author, COUNT(book.book_id) AS book_count
+FROM book
+WHERE author LIKE '%john%'
+GROUP BY author
+ORDER BY book_count DESC;
